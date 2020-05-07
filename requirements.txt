@@ -1,0 +1,7 @@
+markdown
+bs4
+networkx
+pyvis
+PyYAML
+PyQt5
+PyQtWebEngine

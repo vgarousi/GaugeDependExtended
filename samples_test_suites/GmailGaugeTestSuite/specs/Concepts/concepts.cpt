@@ -1,0 +1,13 @@
+# log in
+* test user email is: "cboyle51.test@gmail.com"
+* test user password is: "R21zseVQw1S1"
+* Go to Gmail Sign in page
+* type email address
+* type password
+
+# Compose email with Recipient:<to>, Subject:<subject> Body:<body>
+* click compose
+* enter <to> in recipients box
+* enter <subject> in subject box
+* enter <body> as message body
+* click send
