@@ -1,6 +1,6 @@
-# GaugeDepend
+# Introduction 
 
-This project is a dependency analysis tool for generating, visualizing and exploring dependency graphs for Guage test suites. 
+GaugeDepend project is a dependency analysis tool for generating, visualizing and exploring dependency graphs for Guage test suites. 
 Such as visualization will allow quality assessment of test-automation scripts.
 
 ## Getting Started 
@@ -25,10 +25,8 @@ python -m unittest discover -v
 A Gitlab CI runner has been set up for this project and the unit tests are run automatically on commit.
 
 ## Development team 
-Connor Boyle: https://www.linkedin.com/in/connor-boyle-7239a0150/
+* [Connor Boyle](https://www.linkedin.com/in/connor-boyle-7239a0150/)
 
-Dr. Vahid Garousi: https://www.vgarousi.com
-Associate Professor of Software Engineering
-Queen’s University Belfast, Northern Ireland, UK
+* [Dr. Vahid Garousi](https://www.vgarousi.com), Associate Professor of Software Engineering, Queen’s University Belfast, Northern Ireland, UK
 
-The technical idea behind the tool was developed and provided by Dr. Vahid Garousi, and implementations were done by Connor Boyle. The project was conductred during Winter 2020.
+The project was completed during Spring 2020.
