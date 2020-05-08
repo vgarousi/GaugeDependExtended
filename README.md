@@ -1,7 +1,13 @@
 # Introduction 
 
-GaugeDepend project is a dependency analysis tool for generating, visualizing and exploring dependency graphs for Guage test suites. 
+GaugeDepend is a dependency analysis tool for generating, visualizing and exploring dependency graphs for Gauge test suites. 
 Such as visualization will allow quality assessment of test-automation scripts.
+
+## What problem does GaugeDepend address? / Why should one use this tool?
+
+As automated test suites grow, test scripts could start to become unorganized and suffer from various test "smells", e.g., test duplication. While the [Gauge](https://www.gauge.org) testing framework is a powerful BDD testing tool, our experience in developing and maintaining several large-scale Gauge test suites has shown that, especially when multiple test engineers are involved in developing large Gauge test suites, could start to become unorganized and internal quality of test code would start going down. 
+
+Dependency analysis is a proven technique for visualizing, exploring and pinpointing issues in the way methods and classes in regular (production) code call each other. Visualizing of dependencies in regular (production) code-base has been around for many years, e.g., see tools such as [NDepend](https://www.ndepend.com) [pJDepend]( https://github.com/clarkware/jdepend), [SourceTrail](https://www.sourcetrail.com). We have taken the novel step of conducting dependency analysis in the test-code space, and have found that it is a promising technique for visualizing, exploring and pinpointing issues in the way that test scripts call each other.
 
 ## Getting Started 
 To install this project simply clone the repo and run the following commands to install the dependencies and application modules.
