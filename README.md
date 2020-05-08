@@ -25,7 +25,7 @@ python -m unittest discover -v
 A Gitlab CI runner has been set up for this project and the unit tests are run automatically on commit.
 
 ## Development team and timeline
-* [Connor Boyle](https://www.linkedin.com/in/connor-boyle-7239a0150/)
+* [Connor Boyle](https://www.linkedin.com/in/connor-boyle-7239a0150/), Final Year CS student
 
 * [Dr. Vahid Garousi](https://www.vgarousi.com), Associate Professor of Software Engineering, Queen’s University Belfast, Northern Ireland, UK
 
