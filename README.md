@@ -18,7 +18,7 @@ python application/main.py
 ```
 
 ## Running the tests
-The unit tests for this project are contained in the `test` directory, they can either be executed individually or all unit test can be executed by running the following command in the root directory of this project. 
+We have developed a unit test suite for the GaugeDepend project, using the Python unit testing framework. The unit tests for this project are contained in the `test` directory, they can either be executed individually or all unit test can be executed by running the following command in the root directory of this project. 
 ```
 python -m unittest discover -v
 ```
@@ -29,7 +29,7 @@ A Gitlab CI runner has been set up for this project and the unit tests are run a
 
 * [Dr. Vahid Garousi](https://www.vgarousi.com), Associate Professor of Software Engineering, Queen’s University Belfast, Northern Ireland, UK
 
-The project was completed during Spring 2020.
+The project was completed during Spring 2020, as a student project in [Queen’s University Belfast](https://www.qub.ac.uk).
 
 ## Demo videos
 A general review of the code-base and tool's feature, narrated by Connor Boyle:
