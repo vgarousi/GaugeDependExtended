@@ -7,6 +7,8 @@ Such as visualization will allow quality assessment of test-automation scripts.
 
 As automated test suites grow, test scripts could start to become unorganized and suffer from various test "smells", e.g., test duplication. While the [Gauge](https://www.gauge.org) testing framework is a powerful BDD testing tool, our experience in developing and maintaining several large-scale Gauge test suites has shown that, especially when multiple test engineers are involved in developing large Gauge test suites, could start to become unorganized and internal quality of test code would start going down. 
 
+As a software engineer, Karl Seguin, said in [a blog post](http://codebetter.com/karlseguin/2009/09/12/unit-testing-do-repeat-yourself/): *“Complex and mess unit tests don’t add any value even if the code under test is perfectly designed”*.
+
 Dependency analysis is a proven technique for visualizing, exploring and pinpointing issues in the way methods and classes in regular (production) code call each other. Visualizing of dependencies in regular (production) code-base has been around for many years, e.g., see tools such as [NDepend](https://www.ndepend.com) [pJDepend]( https://github.com/clarkware/jdepend), [SourceTrail](https://www.sourcetrail.com). We have taken the novel step of conducting dependency analysis in the test-code space, and have found that it is a promising technique for visualizing, exploring and pinpointing issues in the way that test scripts call each other.
 
 ## Getting Started 
