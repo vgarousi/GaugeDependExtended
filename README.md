@@ -42,11 +42,7 @@ The project was completed during Spring 2020, as a student project in [Queen’s
 ## Demo videos
 A general review of the code-base and tool's feature, narrated by Connor Boyle:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=KTqZ4sITg4Y" target="_blank"><img src="http://img.youtube.com/vi/KTqZ4sITg4Y/0.jpg" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=zT3zq-WhgAQ" target="_blank"><img src="http://img.youtube.com/vi/zT3zq-WhgAQ/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
----
-Application of the tool on the Gauge test suites of a large web application, named [Testinium](https://www.testinium.com), narrated by Vahid Garousi:
-```
-Will be published soon.
-```
+More video, showing tool's features and benefits, will be published soon.
