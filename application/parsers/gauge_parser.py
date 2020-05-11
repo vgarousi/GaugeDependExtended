@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup
 import re
 import os
-import markdown
 import ntpath
-from .markdown_processor import process_markdown
+from application.parsers.markdown_processor import process_markdown
 from application.models.gauge_data_models import Scenario, Concept
 
 class gauge_parser:

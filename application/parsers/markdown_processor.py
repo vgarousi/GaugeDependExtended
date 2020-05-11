@@ -23,9 +23,10 @@ def process_markdown(markdown_string):
     markdown_string = re.sub(r'\n.*//.*\n', '\n', markdown_string)
     markdown_string = re.sub(r'// .*', '', markdown_string)
     markdown_string = re.sub(r'\n.*\\\*.*\n', '', markdown_string)
-
-    # ?
     markdown_string = re.sub(r':', ' ', markdown_string)
+
+    # Add space after *
+    markdown_string = re.sub(r'\*', '* ', markdown_string)
 
     # Remove markdown tables.
     markdown_string = re.sub(r"\|.*\|", "", markdown_string);
