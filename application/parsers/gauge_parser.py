@@ -55,14 +55,18 @@ class gauge_parser:
 
 
 if __name__ == "__main__":
-    filepath = r"C:\Users\boyle\Google Drive\Uni Stuff\CSC-3002 Project\testinium\specs\LoginPage"
-    for subdir, dirs, files in os.walk(filepath):
-        for file in files:
-            path = subdir + os.sep + file
-            try:
-                with open(path) as file:
-                    m_str = file.read()
-                    process_markdown(m_str)
-
-            except:
-                print(f"Error processing {file}")
+    # filepath = r"C:\Users\boyle\Google Drive\Uni Stuff\CSC-3002 Project\testinium\specs\LoginPage"
+    # for subdir, dirs, files in os.walk(filepath):
+    #     for file in files:
+    #         path = subdir + os.sep + file
+    #         try:
+    #             with open(path) as file:
+    #                 m_str = file.read()
+    #                 process_markdown(m_str)
+    #
+    #         except:
+    #             print(f"Error processing {file}")
+    path = r"C:\Users\boyle\Stuff\specs\allScenarios\allScenarios.spec"
+    parser = gauge_parser()
+    scenarios = parser.parse_spec(path)
+    print(len(scenarios))

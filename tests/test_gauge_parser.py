@@ -4,6 +4,7 @@ from application.parsers.gauge_parser import gauge_parser
 from tests.test_config import *
 
 TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_specification.spec")
+ALT_TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_spec_alternative_heading_style.spec")
 TEST_CPT_PATH = os.path.join(RESOURCE_DIR, "test_concept.cpt")
 
 
@@ -15,6 +16,11 @@ class ParserTest(unittest.TestCase):
     def test_parse_spec_finds_all_scenarios(self):
         scenarios = self.parser.parse_spec(TEST_SPEC_PATH)
         self.assertEqual(len(scenarios), 2)
+
+    def test_parse_spec_alternative_heading_style(self):
+        scenarios = self.parser.parse_spec(ALT_TEST_SPEC_PATH)
+        self.assertEqual(len(scenarios), 7)
+
 
     def test_parse_spec_gets_correct_source_files(self):
         scenarios = self.parser.parse_spec(TEST_SPEC_PATH)
