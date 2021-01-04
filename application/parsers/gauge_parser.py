@@ -3,7 +3,7 @@ import re
 import os
 import ntpath
 from application.parsers.markdown_processor import process_markdown
-from application.models.gauge_data_models import Scenario, Concept
+from application.models.gauge_data_models import Scenario, Concept, Step
 
 class gauge_parser:
     def parse_cpt(self, filepath):
@@ -28,6 +28,7 @@ class gauge_parser:
             filename = ntpath.basename(filepath)
             markdown_string = file.read()
             html = process_markdown(markdown_string)
+            print(html)
             soup = BeautifulSoup(html, 'html.parser')
             spec_name = soup.find('h1').get_text()
             spec_name = re.sub(r'[^\w\s]', '', spec_name)
@@ -46,27 +47,32 @@ class gauge_parser:
             for i in range(len(scenario_titles)):
                 title = scenario_titles[i].get_text()
                 scenario_steps = list()
+                client_side = list()
                 for step in steps[i].findAll('li'):
                     step_text = step.get_text()
-                    scenario_steps.append(step_text)
+                    if("http" in step_text):
+                        print(step_text)
+                        client_side.append(step_text)
+                    #scenario_urls.append(url)
+                    scenario_steps.append(Step(name = step_text, clientSides=client_side))
                 scenario = Scenario(name = title, steps=scenario_steps, source_file=filename)
                 scenarios.append(scenario)
             return scenarios
 
 
 if __name__ == "__main__":
-    # filepath = r"C:\Users\boyle\Google Drive\Uni Stuff\CSC-3002 Project\testinium\specs\LoginPage"
-    # for subdir, dirs, files in os.walk(filepath):
-    #     for file in files:
-    #         path = subdir + os.sep + file
-    #         try:
-    #             with open(path) as file:
-    #                 m_str = file.read()
-    #                 process_markdown(m_str)
-    #
-    #         except:
-    #             print(f"Error processing {file}")
-    path = r"C:\Users\boyle\Stuff\specs\allScenarios\allScenarios.spec"
+    filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.spec"
+    for subdir, dirs, files in os.walk(filepath):
+        for file in files:
+            path = subdir + os.sep + file
+            try:
+                with open(path) as file:
+                    m_str = file.read()
+                    process_markdown(m_str)
+
+            except:
+                print(f"Error processing {file}")
+    path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.spec"
     parser = gauge_parser()
     scenarios = parser.parse_spec(path)
     print(len(scenarios))
