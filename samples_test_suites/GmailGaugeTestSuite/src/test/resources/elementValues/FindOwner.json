@@ -1,0 +1,37 @@
+[
+  {
+    "key": "OwnerTitle",
+    "value": "h2",
+    "type": "css"
+  },
+  {
+    "key": "ViewOwnerTitle",
+    "value": "h2",
+    "type": "css"
+  },
+  {
+    "key": "OwnerInformation",
+    "value": "h2",
+    "type": "css"
+  },
+  {
+    "key": "Add Owner",
+    "value": "/html/body/div/div/a",
+    "type": "xpath"
+  },
+  {
+    "key": "Find Owner",
+    "value": "/html/body/div/div/form/div[2]/div/button",
+    "type": "xpath"
+  },
+  {
+    "key": "lastName",
+    "value": "lastName",
+    "type": "id"
+  },
+  {
+    "key": "Error Message",
+    "value": "/html/body/div/div/form/div[1]/div/div/span/div/p",
+    "type": "xpath"
+  }
+]

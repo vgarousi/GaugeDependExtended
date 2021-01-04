@@ -1,0 +1,32 @@
+[
+  {
+    "key": "find owners",
+    "value": "/html/body/nav/div/div[2]/ul/li[2]/a",
+    "type": "xpath"
+  },
+  {
+    "key": "veterinarians",
+    "value": "/html/body/nav/div/div[2]/ul/li[3]/a",
+    "type": "xpath"
+  },
+  {
+    "key": "error",
+    "value": "/html/body/nav/div/div[2]/ul/li[4]/a",
+    "type": "xpath"
+  },
+  {
+    "key": "Find Owners",
+    "value":"h2",
+    "type": "css"
+  },
+  {
+    "key": "Veterinarians",
+    "value":"h2",
+    "type": "css"
+  },
+  {
+    "key": "Error",
+    "value":"h2",
+    "type": "css"
+  }
+]

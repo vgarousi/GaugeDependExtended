@@ -29,7 +29,7 @@ public class DriverFactory {
                 return new FirefoxDriver();
             case "CHROME":
             default:
-	            ChromeDriverManager.getInstance().version("81.0.4044.69").setup();
+	            ChromeDriverManager.getInstance().version("87.0.4280.20").setup();
 	
 	            ChromeOptions options = new ChromeOptions();
 	            if ("Y".equalsIgnoreCase(System.getenv("HEADLESS"))) {
@@ -37,6 +37,7 @@ public class DriverFactory {
 	                options.addArguments("--disable-gpu");
 	            }
 	            options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+	            options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
 	
 	            return new ChromeDriver(options);
         }

@@ -1,8 +1,8 @@
 # Gmail login tests
 
 // Setup Required for each test.
-* test user email is: "cboyle51.test@gmail.com"
-* test user password is: "R21zseVQw1S1"
+* test user email is: "cameroncbrush@gmail.com"
+* test user password is: "Tr1stanb16"
 
 //Node-2-node
 // fresh login

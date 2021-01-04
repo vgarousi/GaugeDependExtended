@@ -19,7 +19,7 @@
         <div class="logo">
           <a href=".."><img src="../images/gaugeLogo.png" alt="Report logo"></a>
         </div>
-        <h2 class="project">Project: gaugeGmailTest</h2>
+        <h2 class="project">Project: GmailGaugeTestSuite</h2>
       </div>
     </div>
   </header>
@@ -28,57 +28,65 @@
 
 	
   <div class="report-overview">
-    <div class="report_chart">
-      <div class="chart">
-        <svg id="pie-chart" data-results="0,3,0" data-total="3">
-          <path class="status failed" />
-          <path class="shadow failed" data-status="failed"><title>Failed: 0/3</title></path>
-          <path class="status passed" />
-          <path class="shadow passed" data-status="passed"><title>Passed: 3/3</title></path>
-          <path class="status skipped" />
-          <path class="shadow skipped" data-status="skipped"><title>Skipped: 0/3</title></path>
-        </svg>
-      </div>
+   
+  <div class="report_chart">
+    <div class="chart">
+      <svg id="pie-chart" data-results="0,1,0" data-total="1">
+        <path class="status failed" />
+        <path class="shadow failed" data-status="failed"><title>Failed: 0/1</title></path>
+        <path class="status passed" />
+        <path class="shadow passed" data-status="passed"><title>Passed: 1/1</title></path>
+        <path class="status skipped" />
+        <path class="shadow skipped" data-status="skipped"><title>Skipped: 0/1</title></path>
+      </svg>
     </div>
-    <div class="report_test-results">
-      <div class="report_test-result specs">
-          <div class="total-specs" title="Filter all specs"><span class="txt">Total specs</span><span class="value">3</span></div>
-          <div class="fail spec-filter" data-status="failed" title="Filter failed specs"><span class="value">0</span></div>
-          <div class="pass spec-filter" data-status="passed" title="Filter passed specs"><span class="value">3</span></div>
-          <div class="skip spec-filter" data-status="skipped" title="Filter skipped specs"><span class="value">0</span></div>
-      </div>
-      <div class="report_test-result scenarios">
-          <div class="total-scenarios"><span class="txt">Total scenario</span><span class="value">9</span></div>
-          <div class="fail scenario-stats" data-status="failed"><span class="value">0</span></div>
-          <div class="pass scenario-stats" data-status="passed"><span class="value">9</span></div>
-          <div class="skip scenario-stats" data-status="skipped"><span class="value">0</span></div>
-      </div>
+  </div>
+
+   
+  <div class="report_test-results">
+    <div class="report_test-result specs">
+        <div class="total-specs" title="Filter all specs"><span class="txt">Total specs</span><span class="value">1</span></div>
+        <div class="fail spec-filter" data-status="failed" title="Filter failed specs"><span class="value">0</span></div>
+        <div class="pass spec-filter" data-status="passed" title="Filter passed specs"><span class="value">1</span></div>
+        <div class="skip spec-filter" data-status="skipped" title="Filter skipped specs"><span class="value">0</span></div>
     </div>
+    <div class="report_test-result scenarios">
+        <div class="total-scenarios"><span class="txt">Total scenario</span><span class="value">1</span></div>
+        <div class="fail scenario-stats" data-status="failed"><span class="value">0</span></div>
+        <div class="pass scenario-stats" data-status="passed"><span class="value">1</span></div>
+        <div class="skip scenario-stats" data-status="skipped"><span class="value">0</span></div>
+    </div>
+  </div>
+
     <div class="report_details">
-      <ul>
-        <li>
-          <label>Environment </label>
-          <span>default</span>
-        </li>
-        
-        <li>
-          <label>Success Rate </label>
-          <span>100%</span>
-        </li>
-        <li>
-          <label>Total Time </label>
-          <span>00:02:12</span>
-        </li>
-        <li>
-          <label>Generated On </label>
-          <span>Apr 23, 2020 at 4:17pm</span>
-        </li>
-      </ul>
+      
+  <ul>
+    <li>
+      <label>Environment </label>
+      <span>default</span>
+    </li>
+    
+    <li>
+      <label>Success Rate </label>
+      <span>100%</span>
+    </li>
+    <li>
+      <label>Total Time </label>
+      <span>00:00:30</span>
+    </li>
+    <li>
+      <label>Generated On </label>
+      <span>Nov 20, 2020 at 10:05am</span>
+    </li>
+  </ul>
+
       
   
 
       
   
+  
+
 
     </div>
   </div>
@@ -98,37 +106,19 @@
         <input id="searchSpecifications" placeholder="Type specification or tag name" type="text" />
         <i class="fa fa-search"></i>
       </div>
-      <div class='specs-sorting'>
-        <div class="sort sort-specs-name" data-sort-by="specs-name"><span class='sort-icons'><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span><span>Name</span></div>
-        <div class="sort sort-execution-time" data-sort-by="execution-time"><span class='sort-icons'><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span><span>Execution time</span></div>
+      <div class="specs-sorting">
+        <div class="sort sort-specs-name" data-sort-by="specs-name"><span class="sort-icons"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span><span>Name</span></div>
+        <div class="sort sort-execution-time" data-sort-by="execution-time"><span class="sort-icons"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span><span>Execution time</span></div>
       </div>
       <div id="listOfSpecifications">
         <ul id="scenarios" class="spec-list">
         
-          <a href="Inbox.html">
-             
-              <li class='passed spec-name'>
-            
-              <span id="scenarioName" class="scenarioname">Gmail Inbox tests</span>
-              <span id="time" class="time">00:01:09</span>
-            </li>
-          </a>
-          
           <a href="Login.html">
              
-              <li class='passed spec-name'>
+              <li class="passed spec-name">
             
               <span id="scenarioName" class="scenarioname">Gmail login tests</span>
-              <span id="time" class="time">00:00:22</span>
-            </li>
-          </a>
-          
-          <a href="Compose.html">
-             
-              <li class='passed spec-name'>
-            
-              <span id="scenarioName" class="scenarioname">Gmail Compse email tests</span>
-              <span id="time" class="time">00:00:40</span>
+              <span id="time" class="time">00:00:29</span>
             </li>
           </a>
           
@@ -143,11 +133,11 @@
   <div id="specificationContainer" class="details">
     <header class="curr-spec">
       <div class="spec-head-wrapper">
-        <h3 class="spec-head" title="C:\Users\boyle\dev\CSC3002\Gmail_Gauge_Test\gaugeGmailTest\specs\Login.spec">Gmail login tests</h3>
+        <h3 class="spec-head" title="C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\Login.spec">Gmail login tests</h3>
         <div class="hidden report_test-results" alt="Scenarios" title="Scenarios">
           <ul>
             <li class="fail"><span class="value">0</span><span class="txt">Failed</span></li>
-            <li class="pass"><span class="value">3</span><span class="txt">Passed</span></li>
+            <li class="pass"><span class="value">1</span><span class="txt">Passed</span></li>
             <li class="skip"><span class="value">0</span><span class="txt">Skipped</span></li>
           </ul>
         </div>
@@ -155,12 +145,12 @@
       <div class="spec-meta">
         <div class="spec-filename">
           <label for="specFileName">File Path</label>
-          <input id="specFileName" value="C:\Users\boyle\dev\CSC3002\Gmail_Gauge_Test\gaugeGmailTest\specs\Login.spec" readonly/>
+          <input id="specFileName" value="C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\Login.spec" readonly/>
           <button class="clipboard-btn" data-clipboard-target="#specFileName" title="Copy to Clipboard">
               <i class="fa fa-clipboard" aria-hidden="true" title="Copy to Clipboard"></i>
           </button>
         </div>
-        <span class="time">00:00:22</span>
+        <span class="time">00:00:29</span>
       </div>
 
 	
@@ -172,6 +162,7 @@
     
   
 
+    
     
     
 
@@ -190,13 +181,14 @@
       
         
 	
-  <div class='scenario-container passed'>
+  <div class="scenario-container passed">
     
 
 	
   <div class="scenario-head">
     <h3 class="head borderBottom">Successful Gmail login</h3>
-    <span class="time">00:00:10</span>
+    
+    <span class="time">00:00:29</span>
 
 	
   
@@ -208,26 +200,27 @@
   
   
 
+  
 	
 
   
-    <div class='context-step'>
+    <div class="context-step">
       
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:00</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -236,6 +229,8 @@
   
   
 
+  
+  
   
   
   
@@ -246,7 +241,7 @@
     
   
     
-      <span class='parameter'>"cboyle51.test@gmail.com"</span>
+      <span class="parameter">"cameroncbrush@gmail.com"</span>
     
   
   </div>
@@ -257,6 +252,7 @@
   
 
     
+    
   
 
   
@@ -267,6 +263,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -276,23 +273,23 @@
 
     </div>
   
-    <div class='context-step'>
+    <div class="context-step">
       
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:00</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -301,6 +298,8 @@
   
   
 
+  
+  
   
   
   
@@ -311,7 +310,7 @@
     
   
     
-      <span class='parameter'>"R21zseVQw1S1"</span>
+      <span class="parameter">"Tr1stanb16"</span>
     
   
   </div>
@@ -322,6 +321,7 @@
   
 
     
+    
   
 
   
@@ -332,6 +332,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -353,18 +354,18 @@
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:01</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:05</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -373,6 +374,8 @@
   
   
 
+  
+  
   
   
   
@@ -390,6 +393,7 @@
   
 
     
+    
   
 
   
@@ -400,6 +404,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -419,18 +424,18 @@
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:00</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -439,6 +444,8 @@
   
   
 
+  
+  
   
   
   
@@ -456,6 +463,7 @@
   
 
     
+    
   
 
   
@@ -466,6 +474,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -478,18 +487,18 @@
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:01</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:01</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -498,6 +507,8 @@
   
   
 
+  
+  
   
   
   
@@ -515,6 +526,7 @@
   
 
     
+    
   
 
   
@@ -525,6 +537,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -544,18 +557,18 @@
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:03</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:12</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -564,6 +577,8 @@
   
   
 
+  
+  
   
   
   
@@ -581,6 +596,7 @@
   
 
     
+    
   
 
   
@@ -591,6 +607,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -610,18 +627,18 @@
   
     
   
-  <div class='step'>
+  <div class="step">
   
   
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
+    <h5 class="execution-time">
+      <span class="time">Execution Time : 00:00:02</span>
     </h5>
   
-  <div class='step-info passed'>
+  <div class="step-info passed">
   
   <ul>
-    <li class='step'>
-      <div class='step-txt'>
+    <li class="step">
+      <div class="step-txt">
 
 
   
@@ -630,6 +647,8 @@
   
   
 
+  
+  
   
   
   
@@ -647,6 +666,7 @@
   
 
     
+    
   
 
   
@@ -657,6 +677,7 @@
   
   
 
+  
 	</li></ul></div></div>
   
     
@@ -680,815 +701,7 @@
   
   
 
-	
-	</div>
-
-      
-        
-	
-  <div class='scenario-container passed'>
-    
-
-	
-  <div class="scenario-head">
-    <h3 class="head borderBottom">Failed Login - Bad Password</h3>
-    <span class="time">00:00:06</span>
-
-	
   
-
-	</div>
-  
-  
-
-  
-  
-
-	
-
-  
-    <div class='context-step'>
-      
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        test user email is: 
-      </span>
-    
-  
-    
-      <span class='parameter'>"cboyle51.test@gmail.com"</span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-    </div>
-  
-    <div class='context-step'>
-      
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        test user password is: 
-      </span>
-    
-  
-    
-      <span class='parameter'>"R21zseVQw1S1"</span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-    </div>
-  
-  
-    
-  
-    <span><p>// Arrange.</p>
-</span>
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        Go to Gmail Sign in page
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    <span><p>// Act.</p>
-</span>
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        type email address
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:01</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        user types incorrect password
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    <span><p>// Assert.</p>
-</span>
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span class='parameter'>"Password"</span>
-    
-  
-    
-      <span>
-         error message is displayed
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    <span><p>//Node-2-self</p>
-</span>
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-	
-	</div>
-
-      
-        
-	
-  <div class='scenario-container passed'>
-    
-
-	
-  <div class="scenario-head">
-    <h3 class="head borderBottom">Failed Login - Incorrect Email address</h3>
-    <span class="time">00:00:05</span>
-
-	
-  
-
-	</div>
-  
-  
-
-  
-  
-
-	
-
-  
-    <div class='context-step'>
-      
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        test user email is: 
-      </span>
-    
-  
-    
-      <span class='parameter'>"cboyle51.test@gmail.com"</span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-    </div>
-  
-    <div class='context-step'>
-      
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        test user password is: 
-      </span>
-    
-  
-    
-      <span class='parameter'>"R21zseVQw1S1"</span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-    </div>
-  
-  
-    
-  
-    <span><p>// Arrage.</p>
-</span>
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:01</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        Go to Gmail Sign in page
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    <span><p>// Act.</p>
-</span>
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span>
-        user types bad email address
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    <span><p>// Assert</p>
-</span>
-  
-
-  
-    
-  
-    
-  
-  <div class='step'>
-  
-  
-    <h5 class='execution-time'>
-      <span class='time'>Execution Time : 00:00:00</span>
-    </h5>
-  
-  <div class='step-info passed'>
-  
-  <ul>
-    <li class='step'>
-      <div class='step-txt'>
-
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <span class='parameter'>"Email"</span>
-    
-  
-    
-      <span>
-         error message is displayed
-      </span>
-    
-  
-  </div>
-
-  
-    
-    
-  
-
-    
-  
-
-  
-  
-  
-  
-
-  
-  
-
-	</li></ul></div></div>
-  
-    
-  
-
-  
-
-  
-    
-  
-    <span><p>//</p>
-</span>
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
 	
 	</div>
 
@@ -1500,6 +713,7 @@
     
   
 
+    
     
     
     </div>
