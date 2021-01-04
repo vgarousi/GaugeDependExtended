@@ -190,6 +190,16 @@ class GraphRenderer:
                 }
                 node["level"] = 3
                 node["label"] = node["label"].replace("Step:", "")
+            elif "Client:" in node['id']:
+                node["color"] = {
+                    "background": "purple",
+                    "border": "purple",
+                    "highlight": {
+                        "background": "rgba(255,186,96,1)"
+                    }
+                }
+                node["level"] = 4
+                node["label"] = node["label"].replace("Client Side:", "")
 
             label = node["label"].split(" ")
             for i, word in enumerate(label):
