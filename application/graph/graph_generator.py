@@ -22,6 +22,10 @@ class Graph_generator:
             for i, step in enumerate(scenario.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Scenario:{scenario.name}", f"Step:{step}", label=i + 1)
+                #Cameron addition
+                for j, clientSides in enumerate(step.clientSides):
+                    graph.add_node(f"Client:{step.clientSides}", smell=False, smell_names=list())
+                    graph.add_edge(f"Step:{step}", f"Client:{step.clientSides}", label=j+1)
 
         nx.write_yaml(graph, f"{output}/{filename}.yaml")
         return filename
