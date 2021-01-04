@@ -12,3 +12,8 @@ class Scenario:
 class Concept:
     name: str
     steps: list
+
+@dataclass
+class Step:
+    name: str
+    clientSides: list
