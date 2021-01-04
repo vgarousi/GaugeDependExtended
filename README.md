@@ -1,4 +1,7 @@
-# Introduction 
+
+G3-Development of a tool to visualize the dependencies among test suites and the web services called by them
+------------------------------------------------------------------------------------------------------
+# Old Introduction 
 
 GaugeDepend is a dependency analysis tool for generating, visualizing and exploring dependency graphs for Gauge test suites. 
 Such as visualization will allow quality assessment of test-automation scripts.
@@ -45,3 +48,4 @@ A general overview of the tool's features and its code-base:
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 More videos, showing tool's features and benefits, will be published soon.
+---------------------------------------------------------------------------------------------------------

@@ -1,0 +1,52 @@
+[
+  {
+    "key": "PetRow",
+    "value": "/html/body/div/div/table[2]/tbody/tr",
+    "type": "xpath"
+  },
+  {
+    "key": "InformationTable",
+    "value": "/html/body/div/div/table[1]",
+    "type": "xpath"
+  },
+  {
+    "key": "Edit Pet",
+    "value": "/html/body/div/div/table[2]/tbody/tr[1]/td[2]/table/tbody/tr[3]/td[1]/a",
+    "type": "xpath"
+  },
+  {
+    "key": "Update Pet",
+    "value": "/html/body/div/div/form/div[2]/div/button",
+    "type": "xpath"
+  },
+  {
+    "key": "name",
+    "value": "name",
+    "type": "id"
+  },
+  {
+    "key": "birthDate",
+    "value": "birthDate",
+    "type": "id"
+  },
+  {
+    "key": "type",
+    "value": "type",
+    "type": "id"
+  },
+  {
+    "key": "Add new pet",
+    "value": "/html/body/div/div/a[2]",
+    "type": "xpath"
+  },
+  {
+    "key": "NewPet",
+    "value": "/html/body/div/div/h2",
+    "type": "xpath"
+  },
+  {
+    "key": "Add Pet",
+    "value": "/html/body/div/div/form/div[2]/div/button",
+    "type": "xpath"
+  }
+]

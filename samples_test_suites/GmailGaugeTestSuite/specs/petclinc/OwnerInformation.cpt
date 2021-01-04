@@ -1,0 +1,12 @@
+#Go to Owner Information
+*Go to "http://localhost:8080/owners/6"
+
+#Click the Edit Pet button
+*"Edit Pet" button click "30"
+
+#Click the Update Button
+*"Update Pet" button click "30"
+
+#Click on add new pet
+*"Add new pet" button click "30"
+

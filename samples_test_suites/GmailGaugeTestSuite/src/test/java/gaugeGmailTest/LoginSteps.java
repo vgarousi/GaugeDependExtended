@@ -13,8 +13,8 @@ public class LoginSteps extends BaseSteps {
   public void enterEmail(String email) {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("identifier")));
     webDriver.findElement(By.name("identifier")).sendKeys(email);
-    wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".RveJvd.snByac")));
-    webDriver.findElement(By.cssSelector(".RveJvd.snByac")).click();
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("identifierNext")));
+    webDriver.findElement(By.id("identifierNext")).click();
   }
 
   @Step("type email address")
@@ -30,9 +30,13 @@ public class LoginSteps extends BaseSteps {
   public void enterPassword(String pass) throws InterruptedException {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
     webDriver.findElement(By.name("password")).sendKeys(pass);
-    wait.until(ExpectedConditions
-        .refreshed(ExpectedConditions.elementToBeClickable(By.cssSelector(".RveJvd.snByac"))));
-    webDriver.findElement(By.cssSelector(".RveJvd.snByac")).click();
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("passwordNext")));
+    webDriver.findElement(By.id("passwordNext")).click();
+  }
+
+  @Step("press next button")
+  public void pressNextButton() throws InterruptedException{
+    webDriver.findElement(By.className("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc")).click();
   }
 
   @Step("type password")
@@ -49,7 +53,7 @@ public class LoginSteps extends BaseSteps {
   @Step("log out")
   public void logOut() throws InterruptedException {
     WebElement userBtn = (WebElement) wait
-        .until(ExpectedConditions.elementToBeClickable(By.cssSelector(".gb_Ia.gbii")));
+        .until(ExpectedConditions.elementToBeClickable(By.cssSelector(".gb_Ha.gbii")));
     userBtn.click();
     WebElement signOutBtn = (WebElement) wait
         .until(ExpectedConditions.elementToBeClickable(By.linkText("Sign out")));
