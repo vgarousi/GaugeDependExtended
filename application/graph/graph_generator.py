@@ -1,6 +1,7 @@
 import networkx as nx
 import os
 import ntpath
+
 from application.parsers.gauge_parser import gauge_parser
 from application.graph.graph_renderer import GraphRenderer
 
@@ -15,17 +16,17 @@ class Graph_generator:
         filename = ntpath.basename(input_file)
         output = self.config.OUTPUT_DIR
         scenarios = self.parser.parse_spec(input_file)
+        print(scenarios)
         graph = nx.MultiDiGraph()
-
         for scenario in scenarios:
             graph.add_node(f"Scenario:{scenario.name}", source_file=scenario.source_file, smell=False, smell_names=list())
             for i, step in enumerate(scenario.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Scenario:{scenario.name}", f"Step:{step}", label=i + 1)
-                #Cameron addition
-                for j, clientSides in enumerate(step.clientSides):
-                    graph.add_node(f"Client:{step.clientSides}", smell=False, smell_names=list())
-                    graph.add_edge(f"Step:{step}", f"Client:{step.clientSides}", label=j+1)
+                if scenario.client != "null":
+                    print(scenario.client)
+                    graph.add_node(f"Client:{scenario.client}", smell=False, smell_names=list())
+                    graph.add_edge(f"Step:{step}", f"Client:{scenario.client}", label=i + 1 )
 
         nx.write_yaml(graph, f"{output}/{filename}.yaml")
         return filename
@@ -40,6 +41,9 @@ class Graph_generator:
             for i, step in enumerate(concept.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Step:{concept.name}", f"Step:{step}", label=i + 1)
+                # if len(step.clientSides) > 0:
+                #     graph.add_node(f"Client:{step.clientSides}", text="test")
+                #     graph.add_edge(f"Step:{step.name}", f"Client:{step.clientSides}")
         nx.write_yaml(graph, f"{output}/{name}.yaml")
 
         return name

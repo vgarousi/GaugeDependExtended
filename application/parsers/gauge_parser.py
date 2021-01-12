@@ -3,7 +3,8 @@ import re
 import os
 import ntpath
 from application.parsers.markdown_processor import process_markdown
-from application.models.gauge_data_models import Scenario, Concept, Step
+from application.models.gauge_data_models import Scenario, Concept
+
 
 class gauge_parser:
     def parse_cpt(self, filepath):
@@ -47,32 +48,32 @@ class gauge_parser:
             for i in range(len(scenario_titles)):
                 title = scenario_titles[i].get_text()
                 scenario_steps = list()
-                client_side = list()
+                client_side = "null"
                 for step in steps[i].findAll('li'):
                     step_text = step.get_text()
                     if("http" in step_text):
-                        print(step_text)
-                        client_side.append(step_text)
-                    #scenario_urls.append(url)
-                    scenario_steps.append(Step(name = step_text, clientSides=client_side))
-                scenario = Scenario(name = title, steps=scenario_steps, source_file=filename)
+                         print(step_text)
+                         client_side = step_text
+                    scenario_steps.append(step_text)
+                scenario = Scenario(name = title, steps=scenario_steps, client=client_side, source_file=filename)
                 scenarios.append(scenario)
+                print(scenarios)
             return scenarios
 
 
-if __name__ == "__main__":
-    filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.spec"
-    for subdir, dirs, files in os.walk(filepath):
-        for file in files:
-            path = subdir + os.sep + file
-            try:
-                with open(path) as file:
-                    m_str = file.read()
-                    process_markdown(m_str)
-
-            except:
-                print(f"Error processing {file}")
-    path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.spec"
-    parser = gauge_parser()
-    scenarios = parser.parse_spec(path)
-    print(len(scenarios))
+# if __name__ == "__main__":
+#     filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage1.spec"
+#     for subdir, dirs, files in os.walk(filepath):
+#         for file in files:
+#             path = subdir + os.sep + file
+#             try:
+#                 with open(path) as file:
+#                     m_str = file.read()
+#                     process_markdown(m_str)
+#
+#             except:
+#                 print(f"Error processing {file}")
+#     path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage1.spec"
+#     parser = gauge_parser()
+#     scenarios = parser.parse_spec(path)
+#     print(len(scenarios))
