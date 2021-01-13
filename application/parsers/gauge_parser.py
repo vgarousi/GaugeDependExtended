@@ -2,8 +2,9 @@ from bs4 import BeautifulSoup
 import re
 import os
 import ntpath
+import json
 from application.parsers.markdown_processor import process_markdown
-from application.models.gauge_data_models import Scenario, Concept
+from application.models.gauge_data_models import Scenario, Concept, ClientObjects
 
 
 class gauge_parser:
@@ -65,9 +66,22 @@ class gauge_parser:
                 print(scenarios)
             return scenarios
 
+    def parse_resource(self, filepath):
+        with open(filepath) as f:
+            j = json.load(f)
+            keys = list()
+            values = list()
+            for x in j:
+                keys.append(x['key']);
+                values.append((x["value"]))
+            clientObjects = ClientObjects(keys=keys,values=values)
+        return clientObjects
 
-# if __name__ == "__main__":
-#     filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage1.spec"
+
+if __name__ == "__main__":
+    filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\src\test\resources\elementValues\HomePage.json"
+    parser = gauge_parser()
+    test = parser.parse_resource(filepath)
 #     for subdir, dirs, files in os.walk(filepath):
 #         for file in files:
 #             path = subdir + os.sep + file

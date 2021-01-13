@@ -15,6 +15,11 @@ class Concept:
     steps: list
     client: list
 
+@dataclass
+class ClientObjects:
+    keys: list
+    values: list
+
 # @dataclass
 # class Step:
 #     name: str
