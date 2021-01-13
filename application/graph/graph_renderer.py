@@ -34,6 +34,9 @@ class GraphRenderer:
         for node in graph.nodes(data=True):
             node_shape = "ellipse"
             node_id = node[0]
+            print("node[0] " + node_id)
+            #if "Client:" in node[0]:
+                #print(node[0])
             node_label = self.format_node_label(node[0], graph.in_degree(node[0]), graph.out_degree(node[0]))
             if "Scenario:" in node[0]:
                 node_color = self.get_node_color("#2589BD")
@@ -43,6 +46,9 @@ class GraphRenderer:
             elif graph.out_degree(node[0]) > 0:
                 node_color = self.get_node_color("#009B72")
                 node_level = 2 if not self.config.show_src_file else 3
+            elif "Client:" in node[0]:
+                node_color = self.get_node_color("#90a602")
+                node_level = 3 if not self.config.show_src_file else 4
             else:
                 node_color = self.get_node_color("#EC9A29")
                 node_level = 3 if not self.config.show_src_file else 4
@@ -198,7 +204,7 @@ class GraphRenderer:
                         "background": "rgba(255,186,96,1)"
                     }
                 }
-                node["level"] = 4
+                node["level"] = 5
                 node["label"] = node["label"].replace("Client Side:", "")
 
             label = node["label"].split(" ")

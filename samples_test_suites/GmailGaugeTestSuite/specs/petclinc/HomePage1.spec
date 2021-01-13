@@ -17,26 +17,23 @@ Counts for this spec file:
 
 Node-2-node = 3
 
-Total = 1
+Total = 4
 ........................................................................
-Home page Pre Condition
+##Home page Pre Condition
 *Go to Homepage
 *Is the current url the same as "http://localhost:8080/"
 
 ## Node-2-Node = 1: Find Owners
-* Go to Homepage
 * Click the Find Owners button
 * Is the current url the same as "http://localhost:8080/owners/find"
 * Is Find Owners title present
 
 ## Node-2-Node = 2: Find Veterinarians
-* Go to Homepage
 * Click the Veterinarians button
 * Is the current url the same as "http://localhost:8080/vets.html"
 * Is Veterinarians title present
 
 ## Node-2-Node = 3: Find Error
-* Go to Homepage
 * Click the Error button
 * Is the current url the same as "http://localhost:8080/oups"
 * Is Error title present

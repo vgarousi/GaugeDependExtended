@@ -41,9 +41,10 @@ class Graph_generator:
             for i, step in enumerate(concept.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Step:{concept.name}", f"Step:{step}", label=i + 1)
-                # if len(step.clientSides) > 0:
-                #     graph.add_node(f"Client:{step.clientSides}", text="test")
-                #     graph.add_edge(f"Step:{step.name}", f"Client:{step.clientSides}")
+                if concept.client != "null":
+                    print(concept.client)
+                    graph.add_node(f"Client:{concept.client}", smell=False, smell_names=list())
+                    graph.add_edge(f"Step:{step}", f"Client:{concept.client}", label=i + 1 )
         nx.write_yaml(graph, f"{output}/{name}.yaml")
 
         return name

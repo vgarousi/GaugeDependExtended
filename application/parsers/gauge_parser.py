@@ -18,9 +18,13 @@ class gauge_parser:
             for i in range(len(cpt_names)):
                 name = cpt_names[i].get_text()
                 cpt_steps = list()
+                client_side = "null"
                 for step in steps[i].findAll('li'):
-                    cpt_steps.append(step.get_text())
-                concept = Concept(name = name, steps=cpt_steps)
+                    if("http" in step.get_text()):
+                        client_side = step.get_text()
+                    if("http" not in step.get_text()):
+                        cpt_steps.append(step.get_text())
+                concept = Concept(name = name, steps=cpt_steps, client=client_side)
                 concepts.append(concept)
             return concepts
 
@@ -54,7 +58,8 @@ class gauge_parser:
                     if("http" in step_text):
                          print(step_text)
                          client_side = step_text
-                    scenario_steps.append(step_text)
+                    if("http" not in step_text):
+                     scenario_steps.append(step_text)
                 scenario = Scenario(name = title, steps=scenario_steps, client=client_side, source_file=filename)
                 scenarios.append(scenario)
                 print(scenarios)
@@ -73,7 +78,7 @@ class gauge_parser:
 #
 #             except:
 #                 print(f"Error processing {file}")
-#     path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage1.spec"
+#     path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.spec"
 #     parser = gauge_parser()
 #     scenarios = parser.parse_spec(path)
 #     print(len(scenarios))
