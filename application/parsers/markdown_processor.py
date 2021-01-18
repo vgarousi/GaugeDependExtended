@@ -54,17 +54,16 @@ def process_markdown(markdown_string):
 def replace(match_obj):
     if match_obj.group(0).endswith("*") or match_obj.group(0).endswith("\""):
         return "*"
-    else:
-        return ""
+
 
 #Cameron Brush Addition
 #-----------------------------------------------------------------------
 def replaceVariable(match_obj):
-    if match_obj.group(0).endswith("\""):
+    if "http" in match_obj.group(0) and match_obj.group(0).endswith("\""):
         match = re.sub(r'\"',"", match_obj.group(0))
         return "\n" + "*" + str(match)
     else:
-        return "$Variable$"
+        return match_obj.group(0)
 #-----------------------------------------------------------------------
 
 

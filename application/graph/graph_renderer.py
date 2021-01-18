@@ -16,13 +16,13 @@ class GraphRenderer:
         }
 
     def format_node_label(self, label_str, in_degree, out_degree):
-        label_str = re.sub(".*:", "", label_str)
+        #label_str = re.sub(".*:", "", label_str)
         label = label_str.split(" ")
         for j, word in enumerate(label):
             if j != 0 and j % 10 == 0:
                 label[j] = word + '\n'
 
-        label_str = " ".join(label)
+        #label_str = " ".join(label)
         if self.config.show_node_degree:
             label_str = label_str + f"\n ({in_degree},{out_degree})"
         return label_str
@@ -49,6 +49,9 @@ class GraphRenderer:
             elif "Client:" in node[0]:
                 node_color = self.get_node_color("#90a602")
                 node_level = 3 if not self.config.show_src_file else 4
+            elif "ServerSide:" in node[0]:
+                node_color = self.get_node_color("#6900a6")
+                node_level = 4 if not self.config.show_src_file else 5
             else:
                 node_color = self.get_node_color("#EC9A29")
                 node_level = 3 if not self.config.show_src_file else 4
@@ -120,7 +123,7 @@ class GraphRenderer:
                       "nodeSpacing": """ + str(self.config.node_spacing) + """,
                       "treeSpacing": 5,
                       "direction": "LR",
-                      "blockShifting": true,
+                      "blockShifting": false,
                       "edgeMinimization": false,
                       "parentCentralization": true,
                       "sortMethod": "directed"
@@ -128,6 +131,7 @@ class GraphRenderer:
                   },
                   "physics": {
                     "hierarchicalRepulsion": {
+                      "gravity": """ + str(self.config.node_spacing) + """  ,
                       "centralGravity": 0,
                       "springLength": 0,
                       "springConstant": 0,
@@ -205,7 +209,7 @@ class GraphRenderer:
                     }
                 }
                 node["level"] = 5
-                node["label"] = node["label"].replace("Client Side:", "")
+                #node["label"] = node["label"].replace("Client Side:", "")
 
             label = node["label"].split(" ")
             for i, word in enumerate(label):

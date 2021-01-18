@@ -16,14 +16,18 @@ class gauge_parser:
             cpt_names = list(soup.findAll('h1'))
             steps = list(soup.findAll('ul'))
             concepts = list()
+           # print(html)
             for i in range(len(cpt_names)):
                 name = cpt_names[i].get_text()
                 cpt_steps = list()
                 client_side = "null"
                 for step in steps[i].findAll('li'):
-                    if("http" in step.get_text()):
+                    print(step)
+                    if( step.get_text() == ""):
+                        print("EMPTY")
+                    elif("http" in step.get_text()):
                         client_side = step.get_text()
-                    if("http" not in step.get_text()):
+                    elif("http" not in step.get_text()):
                         cpt_steps.append(step.get_text())
                 concept = Concept(name = name, steps=cpt_steps, client=client_side)
                 concepts.append(concept)
@@ -34,7 +38,6 @@ class gauge_parser:
             filename = ntpath.basename(filepath)
             markdown_string = file.read()
             html = process_markdown(markdown_string)
-            print(html)
             soup = BeautifulSoup(html, 'html.parser')
             spec_name = soup.find('h1').get_text()
             spec_name = re.sub(r'[^\w\s]', '', spec_name)
@@ -63,7 +66,6 @@ class gauge_parser:
                      scenario_steps.append(step_text)
                 scenario = Scenario(name = title, steps=scenario_steps, client=client_side, source_file=filename)
                 scenarios.append(scenario)
-                print(scenarios)
             return scenarios
 
     def parse_resource(self, filepath):
@@ -71,17 +73,19 @@ class gauge_parser:
             j = json.load(f)
             keys = list()
             values = list()
+            types = list()
             for x in j:
-                keys.append(x['key']);
+                keys.append(x["key"]);
                 values.append((x["value"]))
-            clientObjects = ClientObjects(keys=keys,values=values)
+                types.append(x["type"])
+            clientObjects = ClientObjects(keys=keys,values=values,types=types)
         return clientObjects
 
 
-if __name__ == "__main__":
-    filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\src\test\resources\elementValues\HomePage.json"
-    parser = gauge_parser()
-    test = parser.parse_resource(filepath)
+#if __name__ == "__main__":
+#     filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\src\test\resources\elementValues\HomePage.json"
+#     parser = gauge_parser()
+#     test = parser.parse_resource(filepath)
 #     for subdir, dirs, files in os.walk(filepath):
 #         for file in files:
 #             path = subdir + os.sep + file
@@ -92,7 +96,7 @@ if __name__ == "__main__":
 #
 #             except:
 #                 print(f"Error processing {file}")
-#     path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.spec"
-#     parser = gauge_parser()
-#     scenarios = parser.parse_spec(path)
-#     print(len(scenarios))
+#      path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.cpt"
+#      parser = gauge_parser()
+#      scenarios = parser.parse_cpt(path)
+#      print(len(scenarios))

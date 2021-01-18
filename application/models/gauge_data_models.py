@@ -19,6 +19,7 @@ class Concept:
 class ClientObjects:
     keys: list
     values: list
+    types: list
 
 # @dataclass
 # class Step:
