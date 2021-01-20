@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import networkx as nx
 import os
 import ntpath
@@ -34,7 +36,13 @@ class Graph_generator:
     def generate_cpt_graph(self, inputfile):
         output = self.config.OUTPUT_DIR
         concepts = self.parser.parse_cpt(inputfile)
-        clientObjects = self.parser.parse_resource(r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\src\test\resources\elementValues\HomePage.json")
+        rfile = os.path.basename(inputfile)
+        infile:str = ""
+        for i in range(7):
+            p = str(inputfile.split("/")[i])
+            infile = infile + p + r"/"
+        resource =  os.path.splitext(rfile)[0]
+        clientObjects = self.parser.parse_resource(Path(infile + r"src\test\resources\elementValues\\" + resource + r".json"))
         name = ntpath.basename(inputfile)
         graph = nx.MultiDiGraph()
         for concept in concepts:
@@ -42,16 +50,18 @@ class Graph_generator:
             for i, step in enumerate(concept.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Step:{concept.name}", f"Step:{step}", label=i + 1)
+                if concept.client != "null":
+                    print(concept.client)
+                    graph.add_node(f"ServerSide:{concept.client}", smell=False, smell_names=list())
+                    graph.add_edge(f"Step:{step}", f"ServerSide:{concept.client}", label=i + 1 )
                 for k,v,t in zip(clientObjects.keys, clientObjects.values, clientObjects.types):
                     if k in step:
                         keyString = f"{k}" + '\n' + f"{t}: {v}"
                         print(keyString)
                         graph.add_node(f"Client:{keyString}", smell=False, smell_names=list())
                         graph.add_edge(f"Step:{step}", f"Client:{keyString}", label=i + 1 )
-                # if concept.client != "null":
-                #     print(concept.client)
-                #     graph.add_node(f"Client:{concept.client}", smell=False, smell_names=list())
-                #     graph.add_edge(f"Step:{step}", f"Client:{concept.client}", label=i + 1 )
+                        if k in concept.client:
+                            graph.add_edge(f"Client:{keyString}", f"ServerSide:{concept.client}", label=i + 1 )
         nx.write_yaml(graph, f"{output}/{name}.yaml")
 
         return name

@@ -48,10 +48,10 @@ class GraphRenderer:
                 node_level = 2 if not self.config.show_src_file else 3
             elif "Client:" in node[0]:
                 node_color = self.get_node_color("#90a602")
-                node_level = 3 if not self.config.show_src_file else 4
+                node_level = 4 if not self.config.show_src_file else 5
             elif "ServerSide:" in node[0]:
                 node_color = self.get_node_color("#6900a6")
-                node_level = 4 if not self.config.show_src_file else 5
+                node_level = 5 if not self.config.show_src_file else 6
             else:
                 node_color = self.get_node_color("#EC9A29")
                 node_level = 3 if not self.config.show_src_file else 4
