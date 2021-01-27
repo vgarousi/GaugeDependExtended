@@ -90,6 +90,7 @@ class GraphRenderer:
             else:
                 net.add_edge(src, dst, dashes=edge_dashes, width=edge_width)
 
+        net.toggle_physics(True)
         net.set_options("""
                 var options = {
                   "edges": {
@@ -135,14 +136,14 @@ class GraphRenderer:
                     }
                   },
                   "physics": {
+                    "enabled": true,
                     "hierarchicalRepulsion": {
-                      "gravity": """ + str(self.config.node_spacing) + """  ,
-                      "centralGravity": 0,
-                      "springLength": 0,
-                      "springConstant": 0,
-                      "overlap": 1,
-                      "damping": 1,
-                      "nodeDistance": """ + str(self.config.node_spacing) + """
+                      "gravity": "-30",
+                      "spring_strength": "0",
+                      "nodeDistance": "200",
+                      "damping": "1",
+                      "spring_length": "100", 
+                      "overlap":"1"
                     },
                     "minVelocity": 0.00,
                     "maxVelocity": 0.00,
@@ -150,8 +151,8 @@ class GraphRenderer:
                   }
                 }
             """)
+        #net.toggle_physics(False)
         net.save_graph(f"{self.config.OUTPUT_DIR}/{filename}")
-
         return f"{self.config.OUTPUT_DIR}/{filename}"
 
 
@@ -224,4 +225,12 @@ class GraphRenderer:
 
             node["label"] = " ".join(label)
 
+
         net.show(f"{self.config.OUTPUT_DIR}/graph.html")
+
+
+    def stabilizer(self, graph):
+        net = Network("70%", "70%")
+        net.from_nx(graph)
+
+
