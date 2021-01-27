@@ -1,4 +1,5 @@
 import re
+import textwrap
 from pyvis.network import Network
 
 
@@ -19,11 +20,14 @@ class GraphRenderer:
         #label_str = re.sub(".*:", "", label_str)
         label = label_str.split(" ")
         for j, word in enumerate(label):
-            if j != 0 and j % 10 == 0:
+            if j != 0 and j % 4 == 0:
                 label[j] = word + '\n'
 
         #label_str = " ".join(label)
         if self.config.show_node_degree:
+            label_str = textwrap.dedent(label_str)
+            label_str = '\n'.join(l for line in label_str.splitlines()
+                      for l in textwrap.wrap(line, width=20))
             label_str = label_str + f"\n ({in_degree},{out_degree})"
         return label_str
 
@@ -101,7 +105,7 @@ class GraphRenderer:
                       "inherit": true,
                       "highlight": "rgba(0,0,0,1)"
                     },
-                    "smooth": false
+                    "smooth": true
                   },
                   "nodes": {
                     "borderWidth": 0.5,
@@ -121,12 +125,13 @@ class GraphRenderer:
                       "enabled": true,
                       "levelSeparation": """ + str(self.config.level_separation) + """,
                       "nodeSpacing": """ + str(self.config.node_spacing) + """,
-                      "treeSpacing": 5,
+                      "nodeDistance": "140",
                       "direction": "LR",
+                      "overlap": 1,
                       "blockShifting": false,
                       "edgeMinimization": false,
                       "parentCentralization": true,
-                      "sortMethod": "directed"
+                      "solver": "Repulsion"
                     }
                   },
                   "physics": {
@@ -135,12 +140,13 @@ class GraphRenderer:
                       "centralGravity": 0,
                       "springLength": 0,
                       "springConstant": 0,
+                      "overlap": 1,
                       "damping": 1,
                       "nodeDistance": """ + str(self.config.node_spacing) + """
                     },
                     "minVelocity": 0.00,
                     "maxVelocity": 0.00,
-                    "solver": "hierarchicalRepulsion"
+                    "solver": "Repulsion"
                   }
                 }
             """)
