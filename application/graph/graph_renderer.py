@@ -90,7 +90,6 @@ class GraphRenderer:
             else:
                 net.add_edge(src, dst, dashes=edge_dashes, width=edge_width)
 
-        net.toggle_physics(True)
         net.set_options("""
                 var options = {
                   "edges": {
@@ -121,37 +120,36 @@ class GraphRenderer:
                     }
                   },
                   "layout": {
-                    "improvedLayout": true,
                     "hierarchical": {
                       "enabled": true,
                       "levelSeparation": """ + str(self.config.level_separation) + """,
-                      "nodeSpacing": """ + str(self.config.node_spacing) + """,
-                      "nodeDistance": "140",
+                      "nodeDistance": 200,
+                      "nodeSpacing": 125,
                       "direction": "LR",
-                      "overlap": 1,
-                      "blockShifting": false,
-                      "edgeMinimization": false,
-                      "parentCentralization": true,
-                      "solver": "Repulsion"
+                      "damping": "0",
+                      "sortMethod": "directed",
+                      "overlap": 0
                     }
                   },
                   "physics": {
-                    "enabled": true,
-                    "hierarchicalRepulsion": {
-                      "gravity": "-30",
-                      "spring_strength": "0",
-                      "nodeDistance": "200",
-                      "damping": "1",
-                      "spring_length": "100", 
-                      "overlap":"1"
+                    "enabled": false,
+                    "hrepulsion": {
+                        "centralGravity": 0,
+                        "springLength": 100,
+                        "springConstant":1,
+                        "nodeDistance": 600,
+                        "damping": 0
+                    },
+                    "stabilization": {
+                        "enabled": true,
+                        "fit": true
                     },
                     "minVelocity": 0.00,
                     "maxVelocity": 0.00,
-                    "solver": "Repulsion"
+                    "solver": "hrepulsion"
                   }
                 }
             """)
-        #net.toggle_physics(False)
         net.save_graph(f"{self.config.OUTPUT_DIR}/{filename}")
         return f"{self.config.OUTPUT_DIR}/{filename}"
 
@@ -224,7 +222,6 @@ class GraphRenderer:
                     label[i] = word + '\n'
 
             node["label"] = " ".join(label)
-
 
         net.show(f"{self.config.OUTPUT_DIR}/graph.html")
 

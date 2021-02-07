@@ -18,6 +18,7 @@ class Graph_generator:
         filename = ntpath.basename(input_file)
         output = self.config.OUTPUT_DIR
         scenarios = self.parser.parse_spec(input_file)
+        print("------SCENARIOS-------")
         print(scenarios)
         graph = nx.MultiDiGraph()
         for scenario in scenarios:
@@ -36,6 +37,7 @@ class Graph_generator:
     def generate_cpt_graph(self, inputfile):
         output = self.config.OUTPUT_DIR
         concepts = self.parser.parse_cpt(inputfile)
+        print("here")
         rfile = os.path.basename(inputfile)
         infile:str = ""
         for i in range(7):
@@ -92,6 +94,9 @@ class Graph_generator:
 
     def render_graph(self, comnined):
         self.renderer.render_graph(comnined)
+
+    def stabilize(self):
+        self.renderer.stabilizer()
 
 
 if __name__ == "__main__":

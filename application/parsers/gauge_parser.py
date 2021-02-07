@@ -16,21 +16,22 @@ class gauge_parser:
             cpt_names = list(soup.findAll('h1'))
             steps = list(soup.findAll('ul'))
             concepts = list()
-           # print(html)
+            #print(html)
             for i in range(len(cpt_names)):
                 name = cpt_names[i].get_text()
                 cpt_steps = list()
                 client_side = "null"
                 for step in steps[i].findAll('li'):
-                    print(step)
-                    if( step.get_text() == ""):
-                        print("EMPTY")
-                    elif("http" in step.get_text()):
+                    #print(step)
+                    clientStep = step.get_text()
+                    if("http" in step.get_text()):
                         client_side = step.get_text()
+                        print(client_side)
                     elif("http" not in step.get_text()):
-                        cpt_steps.append(step.get_text())
+                        cpt_steps.append(clientStep)
                 concept = Concept(name = name, steps=cpt_steps, client=client_side)
                 concepts.append(concept)
+
             return concepts
 
     def parse_spec(self, filepath):
@@ -38,6 +39,7 @@ class gauge_parser:
             filename = ntpath.basename(filepath)
             markdown_string = file.read()
             html = process_markdown(markdown_string)
+           # print(html)
             soup = BeautifulSoup(html, 'html.parser')
             spec_name = soup.find('h1').get_text()
             spec_name = re.sub(r'[^\w\s]', '', spec_name)
@@ -53,6 +55,8 @@ class gauge_parser:
                 scenario = Scenario(name=f"Prerequisite {spec_name}", steps=scenario_steps, source_file=filename)
                 scenarios.append(scenario)
                 steps = steps[1:]
+
+           # print(steps)
             for i in range(len(scenario_titles)):
                 title = scenario_titles[i].get_text()
                 scenario_steps = list()
@@ -60,8 +64,8 @@ class gauge_parser:
                 for step in steps[i].findAll('li'):
                     step_text = step.get_text()
                     if("http" in step_text):
-                         print(step_text)
                          client_side = step_text
+                         print(client_side)
                     if("http" not in step_text):
                      scenario_steps.append(step_text)
                 scenario = Scenario(name = title, steps=scenario_steps, client=client_side, source_file=filename)
@@ -82,21 +86,21 @@ class gauge_parser:
         return clientObjects
 
 
-#if __name__ == "__main__":
-#     filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\src\test\resources\elementValues\HomePage.json"
-#     parser = gauge_parser()
-#     test = parser.parse_resource(filepath)
-#     for subdir, dirs, files in os.walk(filepath):
-#         for file in files:
-#             path = subdir + os.sep + file
-#             try:
-#                 with open(path) as file:
-#                     m_str = file.read()
-#                     process_markdown(m_str)
-#
-#             except:
-#                 print(f"Error processing {file}")
-#      path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\HomePage.cpt"
-#      parser = gauge_parser()
-#      scenarios = parser.parse_cpt(path)
-#      print(len(scenarios))
+if __name__ == "__main__":
+    filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\FindOwner.spec"
+    parser = gauge_parser()
+    test = parser.parse_spec(filepath)
+    for subdir, dirs, files in os.walk(filepath):
+        for file in files:
+            path = subdir + os.sep + file
+            try:
+                with open(path) as file:
+                    m_str = file.read()
+                    process_markdown(m_str)
+
+            except:
+             print(f"Error processing {file}")
+    path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\FindOwner.cpt"
+    parser = gauge_parser()
+    scenarios = parser.parse_cpt(path)
+
