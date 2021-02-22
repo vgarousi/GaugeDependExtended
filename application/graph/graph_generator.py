@@ -26,10 +26,10 @@ class Graph_generator:
             for i, step in enumerate(scenario.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Scenario:{scenario.name}", f"Step:{step}", label=i + 1)
-                if scenario.client != "null":
-                    print(scenario.client)
-                    graph.add_node(f"ServerSide:{scenario.client}", smell=False, smell_names=list())
-                    graph.add_edge(f"Step:{step}", f"ServerSide:{scenario.client}", label=i + 1 )
+                if scenario.web!= "null":
+                    print(scenario.web)
+                    graph.add_node(f"ServerSide:{scenario.web}", smell=False, smell_names=list())
+                    graph.add_edge(f"Step:{step}", f"ServerSide:{scenario.web}", label=i + 1 )
 
         nx.write_yaml(graph, f"{output}/{filename}.yaml")
         return filename
@@ -37,14 +37,18 @@ class Graph_generator:
     def generate_cpt_graph(self, inputfile):
         output = self.config.OUTPUT_DIR
         concepts = self.parser.parse_cpt(inputfile)
-        print("here")
         rfile = os.path.basename(inputfile)
-        infile:str = ""
-        for i in range(7):
-            p = str(inputfile.split("/")[i])
-            infile = infile + p + r"/"
+        resourceFile = True
         resource =  os.path.splitext(rfile)[0]
-        clientObjects = self.parser.parse_resource(Path(infile + r"src\test\resources\elementValues\\" + resource + r".json"))
+        clientObjects = ''
+        print("here")
+        print(self.config.rpath + r"\\" + resource + r".json")
+        try:
+            #new_path = os.path.dirname(r'C://Users//camer//Documents//GaugeDepend//samples_test_suites//GmailGaugeTestSuite//src//test//resources//elementValues//'' + resource + '.json')
+            clientObjects = self.parser.parse_resource(Path(self.config.rpath + r"\\" + resource + r".json"))
+        except FileNotFoundError:
+            resourceFile = False
+
         name = ntpath.basename(inputfile)
         graph = nx.MultiDiGraph()
         for concept in concepts:
@@ -52,18 +56,18 @@ class Graph_generator:
             for i, step in enumerate(concept.steps):
                 graph.add_node(f"Step:{step}", smell=False, smell_names=list())
                 graph.add_edge(f"Step:{concept.name}", f"Step:{step}", label=i + 1)
-                if concept.client != "null":
-                    print(concept.client)
-                    graph.add_node(f"ServerSide:{concept.client}", smell=False, smell_names=list())
-                    graph.add_edge(f"Step:{step}", f"ServerSide:{concept.client}", label=i + 1 )
-                for k,v,t in zip(clientObjects.keys, clientObjects.values, clientObjects.types):
-                    if k in step:
-                        keyString = f"{k}" + '\n' + f"{t}: {v}"
-                        print(keyString)
-                        graph.add_node(f"Client:{keyString}", smell=False, smell_names=list())
-                        graph.add_edge(f"Step:{step}", f"Client:{keyString}", label=i + 1 )
-                        if k in concept.client:
-                            graph.add_edge(f"Client:{keyString}", f"ServerSide:{concept.client}", label=i + 1 )
+                if concept.web != "null":
+                    graph.add_node(f"ServerSide:{concept.web}", smell=False, smell_names=list())
+                    graph.add_edge(f"Step:{step}", f"ServerSide:{concept.web}", label=i + 1 )
+                if resourceFile:
+                    for k,v,t in zip(clientObjects.keys, clientObjects.values, clientObjects.types):
+                        if k in step:
+                            keyString = f"{k}" + '\n' + f"{t}: {v}"
+                            print(keyString)
+                            graph.add_node(f"Client:{keyString}", smell=False, smell_names=list())
+                            graph.add_edge(f"Step:{concept.name}", f"Client:{keyString}", label=i + 1 )
+                            if k in concept.web:
+                                graph.add_edge(f"Client:{keyString}", f"ServerSide:{concept.web}", label=i + 1 )
         nx.write_yaml(graph, f"{output}/{name}.yaml")
 
         return name

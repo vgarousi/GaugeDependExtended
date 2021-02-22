@@ -37,33 +37,42 @@ class Window(QWidget):
         grid_layout.addWidget(self.browse_btn, 0, 3, 1, 1)
         self.browse_btn.clicked.connect(self.browse_click)
 
+        #Resource file
+        self.rfilepath_input = QLineEdit(self)
+        grid_layout.addWidget(self.rfilepath_input, 1, 0, 1, 3)
+
+        # Browse resource file button.
+        self.rbrowse_btn = QPushButton("Browse Resource", self)
+        grid_layout.addWidget(self.rbrowse_btn, 1, 3, 1, 1)
+        self.rbrowse_btn.clicked.connect(self.rbrowse_click)
+
         # Parse button.
         self.parse_btn = QPushButton("Parse Folder", self)
-        grid_layout.addWidget(self.parse_btn, 1, 0, 1, 4)
+        grid_layout.addWidget(self.parse_btn, 2, 0, 1, 4)
         self.parse_btn.clicked.connect(self.parse_click)
 
         # Select all button
         self.select_all_btn = QPushButton("Select all", self)
-        grid_layout.addWidget(self.select_all_btn, 2, 0, 1, 2)
+        grid_layout.addWidget(self.select_all_btn, 3, 0, 1, 2)
         self.select_all_btn.clicked.connect(self.select_all_click)
 
         # Clear all button
         self.clear_all_btn = QPushButton("Clear all", self)
-        grid_layout.addWidget(self.clear_all_btn, 2, 2, 1, 2)
+        grid_layout.addWidget(self.clear_all_btn, 3, 2, 1, 2)
         self.clear_all_btn.clicked.connect(self.clear_all_click)
 
         # File list.
         self.fileList = QListWidget(self)
-        grid_layout.addWidget(self.fileList, 3, 0, 10, 4)
+        grid_layout.addWidget(self.fileList, 4, 0, 11, 4)
 
         # Draw button.
         self.draw_btn = QPushButton("Draw Graph", self)
-        grid_layout.addWidget(self.draw_btn, 13, 0, 1, 4)
+        grid_layout.addWidget(self.draw_btn, 15, 0, 1, 4)
         self.draw_btn.clicked.connect(self.draw_click)
 
         # Options button.
         self.options_button = QPushButton("Options", self)
-        grid_layout.addWidget(self.options_button, 14, 0, 1, 4)
+        grid_layout.addWidget(self.options_button, 17, 18)
         self.options_button.clicked.connect(self.options_click)
 
         # Graph view.
@@ -90,16 +99,29 @@ class Window(QWidget):
         directory = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         self.filepath_input.setText(directory)
 
+    def rbrowse_click(self):
+        rdirectory = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
+        self.rfilepath_input.setText(rdirectory)
+
     def parse_click(self):
         self.clean_output()
         self.fileList.clear()
         path = self.filepath_input.text()
-
+        rpath = self.rfilepath_input.text()
         if len(path) == 0:
             self.show_error("Please enter a directory path")
             return
-
         path = r'{}'.format(path)
+        rpath = r'{}'.format(rpath)
+
+        # Check if rfilepath exists
+        try:
+            print("RPATH1: " + rpath)
+            self.config.rpath = rpath
+            print("RPATH2: " + self.config.rpath)
+        except:
+            self.show_error("Unable to parse folder")
+            return
 
         # Check if filepath exists
         if not os.path.isdir(path):
@@ -111,6 +133,7 @@ class Window(QWidget):
         except:
             self.show_error("Unable to parse folder")
             return
+
 
         for item in items:
             self.add_item(item)
@@ -130,6 +153,7 @@ class Window(QWidget):
         item.setText(filename)
         item.setFlags(item.flags() | Qt.ItemIsUserCheckable)
         item.setCheckState(Qt.Checked)
+
         self.fileList.addItem(item)
 
     def draw_click(self):
@@ -162,6 +186,7 @@ class Window(QWidget):
             combined = self.graph.combine_graphs(checked)
             self.smellController.detectSmells(combined)
             self.graph.render_graph(combined)
+            self.graph.stabilize()
             self.web.load(
                 QUrl.fromLocalFile(QFileInfo(os.path.join(self.config.OUTPUT_DIR, "graph.html")).absoluteFilePath()))
         except Exception as ex:
