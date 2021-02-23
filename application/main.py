@@ -1,6 +1,6 @@
-from UI import MainWindow
+from application.UI import MainWindow
 import os
-from util.config import Config
+from application.util.config import Config
 
 
 

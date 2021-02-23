@@ -11,25 +11,34 @@ def process_markdown(markdown_string):
     markdown_string = re.sub(r"\.\.\.\.[^*]+\.\.\.\.", '', markdown_string)
 
     # Replace variables in steps with $Variable$
-    markdown_string = re.sub(r"\"[\S\s]*?\"", "$Variable$", markdown_string)
-    markdown_string = re.sub(r"<[\S\s]*?>", "$Variable$", markdown_string)
+    # markdown_string = re.sub(r'\*.*', splitString, markdown_string)
+
+    #Cameron Brush Addition
+    #-----------------------------------------------------------------------
+    markdown_string = re.sub(r"\"[\S\s]*?\"", replaceVariable, markdown_string)
+
+    markdown_string = re.sub(r"<[\S\s]*?>", replaceVariable, markdown_string)
+    #------------------------------------------------------------------------
 
     # Properly format dividers, used for markdown headings, some files have spaces in these lines
     # which causes problems with converting to html
     markdown_string = re.sub(r"=====.*", "=====", markdown_string)
     markdown_string = re.sub(r"-----.*", "-----", markdown_string)
 
+
     # Remove comments
-    markdown_string = re.sub(r'\n.*//.*\n', '\n', markdown_string)
+    #markdown_string = re.sub(r'\n.*//.*\n', '\n', markdown_string)
     markdown_string = re.sub(r'// .*', '', markdown_string)
     markdown_string = re.sub(r'\n.*\\\*.*\n', '', markdown_string)
     markdown_string = re.sub(r':', ' ', markdown_string)
+
 
     # Add space after *
     markdown_string = re.sub(r'\*', '* ', markdown_string)
 
     # Remove markdown tables.
     markdown_string = re.sub(r"\|.*\|", "", markdown_string);
+
 
     # Remove any lines that are contain just text and are not headers
     replace_count = -1
@@ -43,7 +52,18 @@ def process_markdown(markdown_string):
 # Helper function to replace lines with just text, regex will match that line and the next line, should not be removed
 # if the next line starts with * i.e. the next line is a step.
 def replace(match_obj):
-    if match_obj.group(0).endswith("*"):
+    if match_obj.group(0).endswith("*") or match_obj.group(0).endswith("\""):
         return "*"
+
+
+#Cameron Brush Addition
+#-----------------------------------------------------------------------
+def replaceVariable(match_obj):
+    if "http" in match_obj.group(0) and match_obj.group(0).endswith("\""):
+        match = re.sub(r'\"',"", match_obj.group(0))
+        return "\n" + "*" + str(match)
     else:
-        return ""
+        return match_obj.group(0)
+#-----------------------------------------------------------------------
+
+

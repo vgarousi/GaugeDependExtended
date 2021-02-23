@@ -1,4 +1,5 @@
 import re
+import textwrap
 from pyvis.network import Network
 
 
@@ -16,14 +17,17 @@ class GraphRenderer:
         }
 
     def format_node_label(self, label_str, in_degree, out_degree):
-        label_str = re.sub(".*:", "", label_str)
+        #label_str = re.sub(".*:", "", label_str)
         label = label_str.split(" ")
         for j, word in enumerate(label):
-            if j != 0 and j % 10 == 0:
+            if j != 0 and j % 4 == 0:
                 label[j] = word + '\n'
 
-        label_str = " ".join(label)
+        #label_str = " ".join(label)
         if self.config.show_node_degree:
+            label_str = textwrap.dedent(label_str)
+            label_str = '\n'.join(l for line in label_str.splitlines()
+                      for l in textwrap.wrap(line, width=20))
             label_str = label_str + f"\n ({in_degree},{out_degree})"
         return label_str
 
@@ -34,6 +38,9 @@ class GraphRenderer:
         for node in graph.nodes(data=True):
             node_shape = "ellipse"
             node_id = node[0]
+            print("node[0] " + node_id)
+            #if "Client:" in node[0]:
+                #print(node[0])
             node_label = self.format_node_label(node[0], graph.in_degree(node[0]), graph.out_degree(node[0]))
             if "Scenario:" in node[0]:
                 node_color = self.get_node_color("#2589BD")
@@ -43,6 +50,12 @@ class GraphRenderer:
             elif graph.out_degree(node[0]) > 0:
                 node_color = self.get_node_color("#009B72")
                 node_level = 2 if not self.config.show_src_file else 3
+            elif "Client:" in node[0]:
+                node_color = self.get_node_color("#90a602")
+                node_level = 4 if not self.config.show_src_file else 5
+            elif "ServerSide:" in node[0]:
+                node_color = self.get_node_color("#6900a6")
+                node_level = 5 if not self.config.show_src_file else 6
             else:
                 node_color = self.get_node_color("#EC9A29")
                 node_level = 3 if not self.config.show_src_file else 4
@@ -92,7 +105,7 @@ class GraphRenderer:
                       "inherit": true,
                       "highlight": "rgba(0,0,0,1)"
                     },
-                    "smooth": false
+                    "smooth": true
                   },
                   "nodes": {
                     "borderWidth": 0.5,
@@ -107,35 +120,37 @@ class GraphRenderer:
                     }
                   },
                   "layout": {
-                    "improvedLayout": true,
                     "hierarchical": {
                       "enabled": true,
                       "levelSeparation": """ + str(self.config.level_separation) + """,
-                      "nodeSpacing": """ + str(self.config.node_spacing) + """,
-                      "treeSpacing": 5,
+                      "nodeDistance": 200,
+                      "nodeSpacing": 125,
                       "direction": "LR",
-                      "blockShifting": true,
-                      "edgeMinimization": false,
-                      "parentCentralization": true,
-                      "sortMethod": "directed"
+                      "damping": "0",
+                      "sortMethod": "directed",
+                      "overlap": 0
                     }
                   },
                   "physics": {
-                    "hierarchicalRepulsion": {
-                      "centralGravity": 0,
-                      "springLength": 0,
-                      "springConstant": 0,
-                      "damping": 1,
-                      "nodeDistance": """ + str(self.config.node_spacing) + """
+                    "enabled": false,
+                    "hrepulsion": {
+                        "centralGravity": 0,
+                        "springLength": 100,
+                        "springConstant":1,
+                        "nodeDistance": 600,
+                        "damping": 0
+                    },
+                    "stabilization": {
+                        "enabled": true,
+                        "fit": true
                     },
                     "minVelocity": 0.00,
                     "maxVelocity": 0.00,
-                    "solver": "hierarchicalRepulsion"
+                    "solver": "hrepulsion"
                   }
                 }
             """)
         net.save_graph(f"{self.config.OUTPUT_DIR}/{filename}")
-
         return f"{self.config.OUTPUT_DIR}/{filename}"
 
 
@@ -190,6 +205,16 @@ class GraphRenderer:
                 }
                 node["level"] = 3
                 node["label"] = node["label"].replace("Step:", "")
+            elif "Client:" in node['id']:
+                node["color"] = {
+                    "background": "purple",
+                    "border": "purple",
+                    "highlight": {
+                        "background": "rgba(255,186,96,1)"
+                    }
+                }
+                node["level"] = 5
+                #node["label"] = node["label"].replace("Client Side:", "")
 
             label = node["label"].split(" ")
             for i, word in enumerate(label):
@@ -199,3 +224,10 @@ class GraphRenderer:
             node["label"] = " ".join(label)
 
         net.show(f"{self.config.OUTPUT_DIR}/graph.html")
+
+
+    def stabilizer(self, graph):
+        net = Network("70%", "70%")
+        net.from_nx(graph)
+
+
