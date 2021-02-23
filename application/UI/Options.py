@@ -37,16 +37,15 @@ class OptionsMenu(QWidget):
         self.level_spacing_input.setSingleStep(25)
         layout.addRow("Level Spacing", self.level_spacing_input)
 
-        self.node_spacing_input = QSpinBox(self)
-        self.node_spacing_input.setMaximum(10000)
-        self.node_spacing_input.setValue(config.node_spacing)
-        self.node_spacing_input.setSingleStep(5)
-        layout.addRow("Node Spacing", self.node_spacing_input)
+        self.node_distance_input = QSpinBox(self)
+        self.node_distance_input.setMaximum(10000)
+        self.node_distance_input.setValue(config.node_distance)
+        self.node_distance_input.setSingleStep(5)
+        layout.addRow("Node Spacing", self.node_distance_input)
 
         self.show_src_input = QCheckBox(self)
         self.show_src_input.setChecked(config.show_src_file)
         layout.addRow("Show source file name for scenarios", self.show_src_input)
-
 
         self.save_btn = QPushButton("Save", self)
         self.save_btn.clicked.connect(self.save_click)
@@ -59,7 +58,7 @@ class OptionsMenu(QWidget):
         self.config.show_node_degree = self.show_deg_input.isChecked()
         self.config.font_size = self.font_input.value()
         self.config.gravity = self.gravity_input.value()
-        self.config.node_spacing = self.node_spacing_input.value()
+        self.config.node_distance = self.node_distance_input.value()
         self.config.level_separation = self.level_spacing_input.value()
         self.config.show_src_file = self.show_src_input.isChecked()
         self.hide()

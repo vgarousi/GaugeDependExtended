@@ -47,7 +47,7 @@ REPORT_HTML_TEMPLATE = r"""
 class SmellController:
     def __init__(self, output_dir):
         self.config = Config(output_dir, show_src_file=False, font_size=16, edge_labels=False, level_separation=1000,
-                             node_spacing=150)
+                             node_distance=150)
         self.renderer = GraphRenderer(self.config)
         self.smells = [
             LongTestSmell(self.renderer),

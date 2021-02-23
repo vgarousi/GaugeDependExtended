@@ -27,7 +27,7 @@ class GraphRenderer:
         if self.config.show_node_degree:
             label_str = textwrap.dedent(label_str)
             label_str = '\n'.join(l for line in label_str.splitlines()
-                      for l in textwrap.wrap(line, width=20))
+                      for l in textwrap.wrap(line, width=30))
             label_str = label_str + f"\n ({in_degree},{out_degree})"
         return label_str
 

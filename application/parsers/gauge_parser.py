@@ -16,20 +16,19 @@ class gauge_parser:
             cpt_names = list(soup.findAll('h1'))
             steps = list(soup.findAll('ul'))
             concepts = list()
-            #print(html)
+            print(html)
             for i in range(len(cpt_names)):
                 name = cpt_names[i].get_text()
                 cpt_steps = list()
-                client_side = "null"
+                web = "null"
                 for step in steps[i].findAll('li'):
                     #print(step)
                     clientStep = step.get_text()
                     if("http" in step.get_text()):
-                        client_side = step.get_text()
-                        print(client_side)
+                        web = step.get_text()
                     elif("http" not in step.get_text()):
                         cpt_steps.append(clientStep)
-                concept = Concept(name = name, steps=cpt_steps, client=client_side)
+                concept = Concept(name = name, steps=cpt_steps, web=web)
                 concepts.append(concept)
 
             return concepts
@@ -60,15 +59,14 @@ class gauge_parser:
             for i in range(len(scenario_titles)):
                 title = scenario_titles[i].get_text()
                 scenario_steps = list()
-                client_side = "null"
+                web = "null"
                 for step in steps[i].findAll('li'):
                     step_text = step.get_text()
                     if("http" in step_text):
-                         client_side = step_text
-                         print(client_side)
+                         web = step_text
                     if("http" not in step_text):
                      scenario_steps.append(step_text)
-                scenario = Scenario(name = title, steps=scenario_steps, client=client_side, source_file=filename)
+                scenario = Scenario(name = title, steps=scenario_steps, web=web, source_file=filename)
                 scenarios.append(scenario)
             return scenarios
 
@@ -87,9 +85,9 @@ class gauge_parser:
 
 
 if __name__ == "__main__":
-    filepath = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\FindOwner.spec"
+    filepath = r"C:\Users\camer\Downloads\testing123\Concepts.cpt"
     parser = gauge_parser()
-    test = parser.parse_spec(filepath)
+    test = parser.parse_cpt(filepath)
     for subdir, dirs, files in os.walk(filepath):
         for file in files:
             path = subdir + os.sep + file
@@ -100,7 +98,7 @@ if __name__ == "__main__":
 
             except:
              print(f"Error processing {file}")
-    path = r"C:\Users\camer\Documents\GaugeDepend\samples_test_suites\GmailGaugeTestSuite\specs\petclinc\FindOwner.cpt"
+    path = r"C:\Users\camer\Downloads\testing123\Concepts.cpt"
     parser = gauge_parser()
     scenarios = parser.parse_cpt(path)
 
