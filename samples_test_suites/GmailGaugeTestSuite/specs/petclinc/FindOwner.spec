@@ -21,7 +21,7 @@ Node-2-itself = 1
 Total = 4
 ........................................................................
 
-## Node-2-node = 1: View Owners
+## Node-2-node = 1: FindOwners to View Owners
 * Go to Find Owners
 * Click the Find Owner button
 * Is View Owners title present

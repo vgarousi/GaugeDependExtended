@@ -6,14 +6,14 @@ class Scenario:
     name: str
     source_file: str
     steps: list
-    client: list = None
+    web: list = None
 
 
 @dataclass
 class Concept:
     name: str
     steps: list
-    client: list = None
+    web: list = None
 
 @dataclass
 class ClientObjects:

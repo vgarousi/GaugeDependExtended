@@ -20,7 +20,7 @@ Node-2-node = 4
 Total = 4
 ........................................................................
 
-## Node-2-itself = 1: View Owner Information
+## Node-2-itself = 1: Home to View Owner Information
 * Go to Owner Information
 * Get number of pets
 * Check if information table is visible

@@ -5,7 +5,8 @@ import re
 # Helper method that takes in raw markdown string, sanitises it and returns HTML string
 def process_markdown(markdown_string):
     # Remove tags
-    markdown_string = re.sub(r'\n.*Tags:.*\n', '\n', markdown_string)
+    markdown_string = re.sub(r'\n.*Tags:.*\n', '\n', markdown_string, flags=re.IGNORECASE)
+    markdown_string = re.sub(r'\n.*Tag:.*\n', '\n', markdown_string, flags=re.IGNORECASE)
 
     # Remove lines that are just dots, used in some sample files
     markdown_string = re.sub(r"\.\.\.\.[^*]+\.\.\.\.", '', markdown_string)
@@ -18,6 +19,9 @@ def process_markdown(markdown_string):
     markdown_string = re.sub(r"\"[\S\s]*?\"", replaceVariable, markdown_string)
 
     markdown_string = re.sub(r"<[\S\s]*?>", replaceVariable, markdown_string)
+
+    #Remove tag lines
+
     #------------------------------------------------------------------------
 
     # Properly format dividers, used for markdown headings, some files have spaces in these lines
@@ -28,10 +32,8 @@ def process_markdown(markdown_string):
 
     # Remove comments
     #markdown_string = re.sub(r'\n.*//.*\n', '\n', markdown_string)
-    markdown_string = re.sub(r'// .*', '', markdown_string)
+    markdown_string = re.sub(r".*/.*",removeComments, markdown_string)
     markdown_string = re.sub(r'\n.*\\\*.*\n', '', markdown_string)
-    markdown_string = re.sub(r':', ' ', markdown_string)
-
 
     # Add space after *
     markdown_string = re.sub(r'\*', '* ', markdown_string)
@@ -66,4 +68,8 @@ def replaceVariable(match_obj):
         return match_obj.group(0)
 #-----------------------------------------------------------------------
 
-
+def removeComments(match_obj):
+    if "http" in match_obj.group(0):
+        return  match_obj.group(0)
+    else:
+        return ""
