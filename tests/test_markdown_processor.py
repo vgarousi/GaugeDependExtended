@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 import os
 from tests.test_config import *
 
-TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "updated_test_specification.spec")
+TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_specification.spec")
+NEW_TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "updated_test_specification.spec")
 TEST_CPT_PATH = os.path.join(RESOURCE_DIR, "test_concept.cpt")
 
 
@@ -48,14 +49,14 @@ class MarkdownProcessorTests(unittest.TestCase):
             self.assertTrue("comment" not in html)
 
 #feature removed
-    def test_variables_replaced(self):
-        with open(TEST_SPEC_PATH) as input_file:
-            string = input_file.read()
-            html = markdown_processor.process_markdown(string)
-            self.assertTrue("$Variable$" in html)
+    # def test_variables_replaced(self):
+    #     with open(TEST_SPEC_PATH) as input_file:
+    #         string = input_file.read()
+    #         html = markdown_processor.process_markdown(string)
+    #         self.assertTrue("$Variable$" in html)
 
     def test_serverside_line_found(self):
-        with open(TEST_SPEC_PATH) as input_file:
+        with open(NEW_TEST_SPEC_PATH) as input_file:
             string = input_file.read()
             html = markdown_processor.process_markdown(string)
             self.assertTrue("<li>http" in html)

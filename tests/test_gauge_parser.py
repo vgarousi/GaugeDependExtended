@@ -5,7 +5,8 @@ from application.models.gauge_data_models import ClientObjects
 from application.parsers.gauge_parser import gauge_parser
 from tests.test_config import *
 
-TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "updated_test_specification.spec")
+TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_specification.spec")
+NEW_TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "updated_test_specification.spec")
 ALT_TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_spec_alternative_heading_style.spec")
 TEST_CPT_PATH = os.path.join(RESOURCE_DIR, "test_concept.cpt")
 TEST_RESOURCE_PATH = os.path.join(RESOURCE_DIR, "testElements/resourceTest.json")
@@ -38,7 +39,7 @@ class ParserTest(unittest.TestCase):
 
         expectedSteps = list()
         expectedSteps.append(["Step 1","Step 2","Step 3"])
-        expectedSteps.append(["Step with $Variable$", "Step 2", "Step 3"])
+        expectedSteps.append(["Step with \"variable\"", "Step 2", "Step 3"])
 
         for i, scenario in enumerate(scenarios):
             self.assertEqual(scenario.steps,expectedSteps[i])
@@ -54,7 +55,7 @@ class ParserTest(unittest.TestCase):
             self.assertEqual(scenario.name, expectedScenarioNames[i])
 
     def test_parse_spec_gets_server_side_node(self):
-        scenarios = self.parser.parse_spec(TEST_SPEC_PATH)
+        scenarios = self.parser.parse_spec(NEW_TEST_SPEC_PATH)
 
         expectedServer = list()
         expectedServer.append("http://test/server/side")

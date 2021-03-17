@@ -11,7 +11,7 @@ from tests.test_config import *
 NORMAL_TEST_PATH = os.path.join(RESOURCE_DIR, "test_concept.cpt")
 NORMAL_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_spec_with_concept.spec")
 SMELL_TEST_PATH = os.path.join(RESOURCE_DIR, "self_referencing_concept.cpt")
-
+EMPTY_DIR = os.path.join(RESOURCE_DIR, "emptyDirect")
 
 class TestSelfRefConceptSmell(unittest.TestCase):
     def setUp(self) -> None:
@@ -30,24 +30,24 @@ class TestSelfRefConceptSmell(unittest.TestCase):
                 os.unlink(file_path)
 
     def test_has_smell(self):
-        graph_name = self.generator.generate_cpt_graph(NORMAL_TEST_PATH)
+        graph_name = self.generator.generate_cpt_graph(NORMAL_TEST_PATH,EMPTY_DIR)
         graph = nx.read_yaml(f"{self.config.OUTPUT_DIR}/{graph_name}.yaml")
         self.assertTrue(self.smell.has_smell(graph))
 
     def test_no_smell(self):
         spec = self.generator.generate_spec_graph(NORMAL_SPEC_PATH)
-        cpt = self.generator.generate_cpt_graph(NORMAL_TEST_PATH)
+        cpt = self.generator.generate_cpt_graph(NORMAL_TEST_PATH,EMPTY_DIR)
         graph = self.generator.combine_graphs([spec,cpt])
         self.assertFalse(self.smell.has_smell(graph))
 
     def test_correct_num_subgraphs(self):
-        graph_name = self.generator.generate_cpt_graph(NORMAL_TEST_PATH)
+        graph_name = self.generator.generate_cpt_graph(NORMAL_TEST_PATH,EMPTY_DIR)
         graph = nx.read_yaml(f"{self.config.OUTPUT_DIR}/{graph_name}.yaml")
         output_files = self.smell.get_smell_subgraph(graph)
         self.assertEqual(len(output_files), 1)
 
     def test_update_graph(self):
-        graph_name = self.generator.generate_cpt_graph(NORMAL_TEST_PATH)
+        graph_name = self.generator.generate_cpt_graph(NORMAL_TEST_PATH,EMPTY_DIR)
         graph = nx.read_yaml(f"{self.config.OUTPUT_DIR}/{graph_name}.yaml")
         self.smell.update_graph(graph)
 
