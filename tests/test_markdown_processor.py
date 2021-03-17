@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import os
 from tests.test_config import *
 
-TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_specification.spec")
+TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "updated_test_specification.spec")
 TEST_CPT_PATH = os.path.join(RESOURCE_DIR, "test_concept.cpt")
 
 
@@ -47,11 +47,38 @@ class MarkdownProcessorTests(unittest.TestCase):
             html = markdown_processor.process_markdown(string)
             self.assertTrue("comment" not in html)
 
+#feature removed
     def test_variables_replaced(self):
         with open(TEST_SPEC_PATH) as input_file:
             string = input_file.read()
             html = markdown_processor.process_markdown(string)
             self.assertTrue("$Variable$" in html)
+
+    def test_serverside_line_found(self):
+        with open(TEST_SPEC_PATH) as input_file:
+            string = input_file.read()
+            html = markdown_processor.process_markdown(string)
+            self.assertTrue("<li>http" in html)
+
+    def test_comment_followed_by_star_removal(self):
+        with open(TEST_SPEC_PATH) as input_file:
+            string = input_file.read()
+            html = markdown_processor.process_markdown(string)
+            print(html)
+            self.assertTrue("Commented" not in html)
+
+    def test_tags_removed(self):
+        with open(TEST_SPEC_PATH) as input_file:
+            string = input_file.read()
+            html = markdown_processor.process_markdown(string)
+            self.assertTrue("tags:" not in html)
+
+    def test_Tag_removed(self):
+        with open(TEST_SPEC_PATH) as input_file:
+            string = input_file.read()
+            html = markdown_processor.process_markdown(string)
+            self.assertTrue("Tag:" not in html)
+
 
 if __name__ == '__main__':
     unittest.main()

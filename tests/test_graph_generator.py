@@ -8,7 +8,9 @@ from tests.test_config import *
 TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "test_specification.spec")
 TEST_SPEC_PATH_CPT = os.path.join(RESOURCE_DIR, "test_spec_with_concept.spec")
 TEST_CPT_PATH = os.path.join(RESOURCE_DIR, "test_concept.cpt")
-
+NEW_TEST_SPEC_PATH = os.path.join(RESOURCE_DIR, "updated_test_specification.spec")
+NEW_TEST_CPT_PATH = os.path.join(RESOURCE_DIR, "updated_test_concept.cpt")
+RESOURCE_PATH = os.path.join(RESOURCE_DIR, "testElements/resourceTest.json")
 
 class GraphGeneratorTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -52,6 +54,7 @@ class GraphGeneratorTests(unittest.TestCase):
         expected_edges.sort(key=lambda edge: edge[0] + edge[1])
 
         self.assertEqual(edges, expected_edges)
+
 
     def test_generate_concept_graph(self):
         output_file = self.generator.generate_cpt_graph(TEST_CPT_PATH)
@@ -158,6 +161,66 @@ class GraphGeneratorTests(unittest.TestCase):
 
         output_files.sort()
         self.assertEqual(output_files, expected_filenames)
+
+    def test_server_Side_Spec(self):
+        output_file = self.generator.generate_spec_graph(NEW_TEST_SPEC_PATH)
+        output_graph = nx.read_yaml(f"{OUTPUT_DIR}/{output_file}.yaml")
+        nodes = list(output_graph.nodes())
+        self.assertEqual(len(nodes), 15)
+
+        expected_nodes = ['Scenario:Commentfollowedbystar', 'Scenario:Remove lowercase tags', 'Scenario:Remove upper case Tag', 'Scenario:ServerSideTest', 'ServerSide:http://test/server/side', 'Step:\nStep 1.1\n', 'Step:\nStep 2.2\n', 'Step:Step 1', 'Step:Step 1.3', 'Step:Step 1.4', 'Step:Step 2 that contains ', 'Step:Step 2.3', 'Step:Step 2.4', 'Step:Step 3', 'Step:Step 3.2']
+
+        expected_nodes.sort()
+        nodes.sort()
+
+        self.assertEqual(nodes, expected_nodes)
+
+        edges = list(output_graph.edges())
+        expected_edges = [
+            ('Scenario:Commentfollowedbystar', 'Step:\nStep 1.1\n'),
+            ('Scenario:Commentfollowedbystar', 'Step:\nStep 2.2\n'),
+            ('Scenario:Commentfollowedbystar', 'Step:Step 3.2'),
+            ('Scenario:Remove lowercase tags', 'Step:Step 1.4'),
+            ('Scenario:Remove lowercase tags', 'Step:Step 2.4'),
+            ('Scenario:Remove upper case Tag', 'Step:Step 1.3'),
+            ('Scenario:Remove upper case Tag', 'Step:Step 2.3'),
+            ('Scenario:ServerSideTest', 'Step:Step 1'),
+            ('Scenario:ServerSideTest', 'Step:Step 2 that contains '),
+            ('Scenario:ServerSideTest', 'Step:Step 3'),
+            ('Step:Step 1', 'ServerSide:http://test/server/side'),
+            ('Step:Step 2 that contains ', 'ServerSide:http://test/server/side'),
+            ('Step:Step 3', 'ServerSide:http://test/server/side')
+        ]
+
+        edges.sort(key=lambda edge: edge[0] + edge[1])
+        expected_edges.sort(key=lambda edge: edge[0] + edge[1])
+
+        self.assertEqual(edges, expected_edges)
+
+    def test_updates_generate_concept_graph(self):
+        output_file = self.generator.generate_cpt_graph(NEW_TEST_CPT_PATH,RESOURCE_PATH)
+        output_graph = nx.read_yaml(f"{OUTPUT_DIR}/{output_file}.yaml")
+        nodes = list(output_graph.nodes())
+        self.assertEqual(len(nodes), 4)
+
+        expected_nodes = ['Step:"Test1" button click "30"', 'Step:"Test2" button click "30"', 'Step:Step 2.2', 'Step:Step 3.2']
+
+        expected_nodes.sort()
+        nodes.sort()
+
+        self.assertEqual(nodes, expected_nodes)
+
+        edges = list(output_graph.edges())
+        print(edges)
+        expected_edges = [
+            ('Step:Step 2.2', 'Step:"Test1" button click "30"'),
+            ('Step:Step 3.2', 'Step:"Test2" button click "30"')
+        ]
+
+        edges.sort(key=lambda edge: edge[0] + edge[1])
+        expected_edges.sort(key=lambda edge: edge[0] + edge[1])
+
+        self.assertEqual(edges, expected_edges)
 
 if __name__ == '__main__':
     unittest.main()
