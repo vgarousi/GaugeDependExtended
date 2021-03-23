@@ -61,7 +61,7 @@ def replace(match_obj):
 #Cameron Brush Addition
 #-----------------------------------------------------------------------
 def replaceVariable(match_obj):
-    if ("http" or "https") in match_obj.group(0) and match_obj.group(0).endswith("\""):
+    if ("http" or "https") in match_obj.group(0):
         match = re.sub(r'\"',"", match_obj.group(0))
         return "\n" + "*" + str(match)
     else:
