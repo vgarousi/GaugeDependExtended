@@ -21,9 +21,5 @@ class ClientObjects:
     values: list
     types: list
 
-# @dataclass
-# class Step:
-#     name: str
-#     clientSides: str
 
 
