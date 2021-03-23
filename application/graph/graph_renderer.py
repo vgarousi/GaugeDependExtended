@@ -32,8 +32,8 @@ class GraphRenderer:
         return label_str
 
     def render_graph(self, graph, filename="graph.html"):
-        net = Network("100%", "100%")
-
+        net = Network("100%", "100%", heading=self.config.heading)
+        net.toggle_physics(True)
         source_files = list()
         for node in graph.nodes(data=True):
             node_shape = "ellipse"
@@ -63,16 +63,16 @@ class GraphRenderer:
             if node[1]["smell"]:
                 node_color = self.get_node_color("red")
                 node_title = "\n".join(node[1]["smell_names"])
-                net.add_node(n_id=node_id, label=node_label, level=node_level, color=node_color, shape=node_shape, title=node_title)
+                net.add_node(n_id=node_id, label=node_label, level=node_level, color=node_color, shape=node_shape, physics=True, title=node_title, stabilization=True)
             else:
-                net.add_node(n_id=node_id, label=node_label, level=node_level, color=node_color, shape=node_shape)
+                net.add_node(n_id=node_id, label=node_label, level=node_level, color=node_color, shape=node_shape,physics=True,  stabilization=True)
 
         if self.config.show_src_file:
             for pair in source_files:
                 src = pair[0]
                 dst = pair[1]
-                net.add_node(src, src, shape=node_shape, level=1, color=self.get_node_color("#9FA08E"))
-                net.add_edge(src, dst)
+                net.add_node(src, src, shape=node_shape, level=1, color=self.get_node_color("#9FA08E"),physics=True, stabilization=True)
+                net.add_edge(src, dst,mass=10, physics=True)
 
         edges = list(graph.edges())
         for src, dst in edges:
@@ -86,10 +86,11 @@ class GraphRenderer:
                 for key in graph_data:
                     labels.append(str(graph_data[key]["label"]))
                 edge_label = ",".join(labels)
-                net.add_edge(src, dst, dashes=edge_dashes, width=edge_width, label=edge_label)
+                net.add_edge(src, dst, dashes=edge_dashes, width=edge_width, label=edge_label, physics=True)
             else:
-                net.add_edge(src, dst, dashes=edge_dashes, width=edge_width)
-
+                net.add_edge(src, dst, dashes=edge_dashes, width=edge_width, physics=True)
+        net.toggle_physics(True)
+        net.hrepulsion(10,0,200,0,0)
         net.set_options("""
                 var options = {
                   "edges": {
@@ -108,6 +109,7 @@ class GraphRenderer:
                     "smooth": true
                   },
                   "nodes": {
+                    "overlap":0,
                     "borderWidth": 0.5,
                     "borderWidthSelected":1,
                      "font": {
@@ -120,33 +122,39 @@ class GraphRenderer:
                     }
                   },
                   "layout": {
+                    "improvedLayout": true,
                     "hierarchical": {
                       "enabled": true,
+                      "teeSpacing": 100,
+                      "nodeSpacing": 100,
+                      "edgeMinimization": false,
+                      "parentCentralization": false,
+                      "blockShifting":true,
+                      "avoidOverlap":1,
                       "levelSeparation": """ + str(self.config.level_separation) + """,
-                      "nodeDistance": 200,
-                      "nodeSpacing": 125,
                       "direction": "LR",
-                      "damping": "0",
-                      "sortMethod": "directed",
-                      "overlap": 0
+                      "shakeTowards": "roots",
+                      "sortMethod": "hubsize"
                     }
                   },
-                  "physics": {
-                    "enabled": false,
-                    "hrepulsion": {
-                        "centralGravity": 0,
-                        "springLength": 100,
-                        "springConstant":1,
-                        "nodeDistance": 600,
-                        "damping": 0
+                  "physics":{
+                    "enabled": true,
+                    "hierarchicalRepulsion": {
+                        "centralGravity": 5,
+                        "nodeDistance": """ + str(self.config.node_distance) + """,
+                        "springConstant": 0.01,
+                        "avoidOverlap": 1,
+                        "damping": 1,
+                        "springLength": 200,
+                        "maxVelocity": 0.01,
+                        "minVelocity": 0.0
                     },
+                    "solver": "hierarchicalRepulsion",
                     "stabilization": {
-                        "enabled": true,
-                        "fit": true
-                    },
-                    "minVelocity": 0.00,
-                    "maxVelocity": 0.00,
-                    "solver": "hrepulsion"
+                            "enabled": true,
+                            "iterations":1000,
+                            "updateInterval": 15
+                    }
                   }
                 }
             """)
@@ -203,7 +211,7 @@ class GraphRenderer:
                         "background": "rgba(255,186,96,1)"
                     }
                 }
-                node["level"] = 3
+                node["level"] = 2
                 node["label"] = node["label"].replace("Step:", "")
             elif "Client:" in node['id']:
                 node["color"] = {
@@ -226,8 +234,6 @@ class GraphRenderer:
         net.show(f"{self.config.OUTPUT_DIR}/graph.html")
 
 
-    def stabilizer(self, graph):
-        net = Network("70%", "70%")
-        net.from_nx(graph)
+
 
 
