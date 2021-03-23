@@ -38,9 +38,6 @@ class GraphRenderer:
         for node in graph.nodes(data=True):
             node_shape = "ellipse"
             node_id = node[0]
-            print("node[0] " + node_id)
-            #if "Client:" in node[0]:
-                #print(node[0])
             node_label = self.format_node_label(node[0], graph.in_degree(node[0]), graph.out_degree(node[0]))
             if "Scenario:" in node[0]:
                 node_color = self.get_node_color("#2589BD")
