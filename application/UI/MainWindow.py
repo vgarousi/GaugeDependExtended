@@ -8,6 +8,7 @@ import shutil
 import os
 from application.UI import Options
 from application.smells.smellController import SmellController
+import networkx as nx
 
 
 class Window(QWidget):
@@ -18,6 +19,7 @@ class Window(QWidget):
         self.setMinimumSize(1000, 600)
         self.setWindowTitle("Gauge Explorer")
         sansFont = QFont("Arial", 10)
+        resources = []
         self.setFont(sansFont)
         self.UI()
         self.options = Options.OptionsMenu(config)
@@ -107,6 +109,7 @@ class Window(QWidget):
         self.clean_output()
         self.fileList.clear()
         path = self.filepath_input.text()
+        self.config.heading = os.path.basename(os.path.normpath(path))
         rpath = self.rfilepath_input.text()
         if len(path) == 0:
             self.show_error("Please enter a directory path")
@@ -129,7 +132,7 @@ class Window(QWidget):
             return
 
         try:
-            items = self.graph.parse_folder(path)
+            items = self.graph.parse_folder(path,rpath)
         except:
             self.show_error("Unable to parse folder")
             return
@@ -185,8 +188,8 @@ class Window(QWidget):
         try:
             combined = self.graph.combine_graphs(checked)
             self.smellController.detectSmells(combined)
+            self.graph.stabilize(combined)
             self.graph.render_graph(combined)
-            self.graph.stabilize()
             self.web.load(
                 QUrl.fromLocalFile(QFileInfo(os.path.join(self.config.OUTPUT_DIR, "graph.html")).absoluteFilePath()))
         except Exception as ex:

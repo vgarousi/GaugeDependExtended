@@ -17,12 +17,6 @@ class OptionsMenu(QWidget):
         self.font_input.setMinimum(5)
         layout.addRow("Graph Font Size", self.font_input)
 
-        self.gravity_input = QSpinBox(self)
-        self.gravity_input.setValue(self.config.gravity)
-        self.gravity_input.setMaximum(50)
-        self.gravity_input.setMinimum(-100)
-        layout.addRow("Node Repulsion", self.gravity_input)
-
         self.edge_label_input = QCheckBox(self)
         self.edge_label_input.setChecked(self.config.edge_labels)
         layout.addRow("Show edge labels", self.edge_label_input)
@@ -57,7 +51,6 @@ class OptionsMenu(QWidget):
         self.config.edge_labels = self.edge_label_input.isChecked()
         self.config.show_node_degree = self.show_deg_input.isChecked()
         self.config.font_size = self.font_input.value()
-        self.config.gravity = self.gravity_input.value()
         self.config.node_distance = self.node_distance_input.value()
         self.config.level_separation = self.level_spacing_input.value()
         self.config.show_src_file = self.show_src_input.isChecked()

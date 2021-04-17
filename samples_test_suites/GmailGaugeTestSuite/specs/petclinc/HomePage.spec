@@ -23,17 +23,18 @@ Total = 4
 *Go to Homepage
 *Is the current url the same as "http://localhost:8080/"
 
-## Node-2-Node = 1: Find Owners
+## Node-2-Node = 1: Home to Find Owners
+//THIS IS A TEST
 * Click the Find Owners button
 * Is the current url the same as "http://localhost:8080/owners/find"
 * Is Find Owners title present
 
-## Node-2-Node = 2: Find Veterinarians
+## Node-2-Node = 2: Home to Find Veterinarians
 * Click the Veterinarians button
 * Is the current url the same as "http://localhost:8080/vets.html"
 * Is Veterinarians title present
 
-## Node-2-Node = 3: Find Error
+## Node-2-Node = 3: Home to Find Error
 * Click the Error button
 * Is the current url the same as "http://localhost:8080/oups"
 * Is Error title present

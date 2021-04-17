@@ -16,7 +16,6 @@ class gauge_parser:
             cpt_names = list(soup.findAll('h1'))
             steps = list(soup.findAll('ul'))
             concepts = list()
-            print(html)
             for i in range(len(cpt_names)):
                 name = cpt_names[i].get_text()
                 cpt_steps = list()
@@ -38,7 +37,6 @@ class gauge_parser:
             filename = ntpath.basename(filepath)
             markdown_string = file.read()
             html = process_markdown(markdown_string)
-           # print(html)
             soup = BeautifulSoup(html, 'html.parser')
             spec_name = soup.find('h1').get_text()
             spec_name = re.sub(r'[^\w\s]', '', spec_name)
@@ -48,23 +46,26 @@ class gauge_parser:
             # Checking if there are any before steps
             if len(scenario_titles) != len(steps):
                 scenario_steps = list()
+                web = "null"
                 for step in steps[0].findAll('li'):
                     step_text = step.get_text()
-                    scenario_steps.append(step_text)
-                scenario = Scenario(name=f"Prerequisite {spec_name}", steps=scenario_steps, source_file=filename)
+                    if(("http" or "https") in step_text):
+                        web = step_text
+                    if(("http" or "https") not in step_text):
+                        scenario_steps.append(step_text)
+                scenario = Scenario(name=f"Prerequisite {spec_name}", steps=scenario_steps, web=web, source_file=filename)
                 scenarios.append(scenario)
                 steps = steps[1:]
 
-           # print(steps)
             for i in range(len(scenario_titles)):
                 title = scenario_titles[i].get_text()
                 scenario_steps = list()
                 web = "null"
                 for step in steps[i].findAll('li'):
                     step_text = step.get_text()
-                    if("http" in step_text):
+                    if(("http" or "https") in step_text):
                          web = step_text
-                    if("http" not in step_text):
+                    if(("http" or "https") not in step_text):
                      scenario_steps.append(step_text)
                 scenario = Scenario(name = title, steps=scenario_steps, web=web, source_file=filename)
                 scenarios.append(scenario)
