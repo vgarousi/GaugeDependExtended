@@ -137,25 +137,26 @@ class GraphRenderer:
                   "physics":{
                     "enabled": true,
                     "hierarchicalRepulsion": {
-                        "centralGravity": 5,
+                        "centralGravity": 10,
                         "nodeDistance": """ + str(self.config.node_distance) + """,
-                        "springConstant": 0.01,
-                        "avoidOverlap": 1,
+                        "springConstant": 0,
+                        "avoidOverlap": 0.9,
                         "damping": 1,
                         "springLength": 200,
-                        "maxVelocity": 0.01,
+                        "maxVelocity": 0.0,
                         "minVelocity": 0.0
                     },
                     "solver": "hierarchicalRepulsion",
                     "stabilization": {
                             "enabled": true,
-                            "iterations":1000,
-                            "updateInterval": 15
+                            "iterations":2000,
+                            "updateInterval": 5
                     }
                   }
                 }
             """)
         net.save_graph(f"{self.config.OUTPUT_DIR}/{filename}")
+        print("Total Number of Nodes: " + str(len(net.get_nodes())))
         return f"{self.config.OUTPUT_DIR}/{filename}"
 
 
