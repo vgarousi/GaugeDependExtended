@@ -4,7 +4,7 @@ Development of a tool to visualize the dependencies among test suites and the we
 GaugeDependExtended is a dependency analysis tool for generating, visualizing and exploring dependency graphs for Gauge test suites and the web services called by them. 
 Such visualization will allow quality assessment of test-automation scripts being developed for web applications.
 
-## What problem does GaugeDependExtend address? / Why should one use this tool?
+## What problem does GaugeDependExtended address? / Why should one use this tool?
 
 Software testing is an industry standard for web developers and software engineers. When developing a web application, engineers have found that the test code often has errors and inefficiencies. To help prevent this, continual quality assessment and maintenance is necessary to ensure that the tests are repeatable, predictable, and efficiently executed.  
 
