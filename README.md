@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ```
 pip install .
 ```
-
+(Tested using Python version 3.8.8)
 Then to launch the application execute the file `main.py` e.g. 
 ```
 python application/main.py
