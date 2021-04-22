@@ -188,7 +188,6 @@ class Window(QWidget):
         try:
             combined = self.graph.combine_graphs(checked)
             self.smellController.detectSmells(combined)
-            self.graph.stabilize(combined)
             self.graph.render_graph(combined)
             self.web.load(
                 QUrl.fromLocalFile(QFileInfo(os.path.join(self.config.OUTPUT_DIR, "graph.html")).absoluteFilePath()))
