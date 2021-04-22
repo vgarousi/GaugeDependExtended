@@ -11,14 +11,13 @@ Software testing is an industry standard for web developers and software enginee
 The visualisation of client-side and server-side test dependencies will allow software test engineers to conduct dependency analysis and assist with quality assessment and maintenance of the test suites.
 
 ## Getting Started 
-To install this project simply clone the repo and run the following commands to install the dependencies and application modules.
+To install this project simply clone the repo and run the following commands to install the dependencies and application modules (Tested using Python version 3.8.8).
 ```
 pip install -r requirements.txt
 ```
 ```
 pip install .
 ```
-(Tested using Python version 3.8.8)
 Then to launch the application execute the file `main.py` e.g. 
 ```
 python application/main.py
