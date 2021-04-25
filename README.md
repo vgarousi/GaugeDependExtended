@@ -10,7 +10,7 @@ Software testing is an industry standard for web developers and software enginee
 
 The visualisation of client-side and server-side test dependencies will allow software test engineers to conduct dependency analysis and assist with quality assessment and maintenance of the test suites.
 
-![alt text](https://github.com/40206673/vg03-csc3002-40206673/blob/master/resources/petclinic_graph.PNG?raw=true)
+![alt text](https://gitlab2.eeecs.qub.ac.uk/40206673/vg03-csc3002-40206673/blob/master/resources/petclinic_graph.PNG?raw=true)
 
 ## Getting Started 
 To install this project simply clone the repo and run the following commands to install the dependencies and application modules (Tested using Python version 3.8.8).
