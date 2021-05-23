@@ -1,0 +1,20 @@
+#Go to Find Owners
+*Go to "http://localhost:8080/owners/find"
+
+#Go to Owners
+*Go to "http://localhost:8080/owners?lastName="
+
+#Click the Add Owner button
+* "Add Owner" button click "30"
+
+#Click the Find Owner button
+* "Find Owner" button click "30"
+
+#Is Owner title present
+*check for "OwnerTitle" with "Owner"
+
+#Is View Owners title present
+*check for "ViewOwnerTitle" with "Owners"
+
+#Is Owner Information title present
+*check for "OwnerInformation" with "Owner Information"

@@ -1,0 +1,31 @@
+# <buttonName> button click <timeout>
+* check the <buttonName> is visible <timeout>
+* focus on element <buttonName>
+* Check the <buttonName> is clickable <timeout>
+* Click on <buttonName> element
+
+#Is <title> title present containing <text>
+*check for <title> with <text>
+
+#Click the Find Owners button
+* "find owners" button click "30"
+
+#Click the Veterinarians button
+* "veterinarians" button click "30"
+
+#Click the Error button
+* "error" button click "30"
+
+#Go to Homepage
+*Go to "http://localhost:8080/"
+
+#Is Find Owners title present
+*Is "Find Owners" title present containing "Find Owners"
+
+#Is Veterinarians title present
+*Is "Veterinarians" title present containing "Veterinarians"
+
+#Is Error title present
+*Is "Error" title present containing "Something happened..."
+
+
