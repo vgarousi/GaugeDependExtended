@@ -15,7 +15,7 @@ Software testing is an industry standard for web developers and software enginee
 
 The visualisation of client-side and server-side test dependencies will allow software test engineers to conduct dependency analysis and assist with quality assessment and maintenance of the test suites.
 
-![Example graph](https://gitlab2.eeecs.qub.ac.uk/40206673/vg03-csc3002-40206673/blob/master/resources/petclinic_graph.PNG?raw=true)
+![Example graph](https://raw.githubusercontent.com/vgarousi/GaugeDependExtended/6d952e23a06fb498748967971a40b9679e82b9f6/resources/petclinic_graph.JPG)
 
 # Development team 
 * (Supervisor): [Dr. Vahid Garousi](https://www.vgarousi.com), Professor of Software Engineering in Queen's University Belfast; and Managing Consultant of Bahar Software Engineering Consulting Corporation, UK
