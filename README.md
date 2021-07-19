@@ -7,7 +7,7 @@ Such visualization will allow quality assessment of test-automation scripts bein
 
 The tool was designed and developed during Fall 2020-Spring 2021, as part of a Final-Year capstone engineering project in Queen's University Belfast, UK. 
 
-GaugeDependExtended has been built on top of an earlier tool, named [GaugeDepend](https://github.com/vgarousi/GaugeDepend), which was also developed in our team, bakc in Spring 2020. Thus, it is the "extended" version of that earlier tool.
+GaugeDependExtended has been built on top of an earlier tool, named [GaugeDepend](https://github.com/vgarousi/GaugeDepend), which was also developed in our team, back in Spring 2020. Thus, it is the "extended" version of that earlier tool.
 
 # What need does GaugeDependExtended address? / Why should one use this tool?
 
